@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JALA</title>
+    <meta name="author" content="Domagoj Škender" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,800;1,100;1,200;1,300;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <img class="header-logo" src="JALA-Logo-NO-TEXT.ico" alt="" />
+      <h1 class="header-title">JALA</h1>
+      <div class="header-user-info">
+        <h2 class="header-user-name">
+          Domagoj
+          <img
+            class="header-user-pic clickable"
+            src="https://media-exp1.licdn.com/dms/image/C5603AQGvDSmHjdtS7A/profile-displayphoto-shrink_200_200/0/1553626955490?e=1628121600&v=beta&t=AJ1sd_hRNZbDEdggcXpg1RkldAcayW_H31QkAzpn2EU"
+            onerror="this.src='JALA-Logo-NO-TEXT b&w.svg'"
+            alt=""
+          />
+        </h2>
+      </div>
+    </header>
+    <div class="dummy"></div>
+    <div class="main-content">
+      <div class="top-bar">
+        <h2 class="top-bar__name">Projekti</h2>
+        <i
+          class="fa fa-plus-square top-bar__add-new clickable"
+          id="btn-add-project"
+          aria-hidden="true"
+        ></i>
+      </div>
+
+      <!--Progress bar fills written inline for show, remove when implementing dynamic change-->
+      <div class="task-card-container projects-container">
+        <div class="task-card task-card-project">
+          <div class="task-card__close-container">
+            <i class="fa fa-times task-card__close" aria-hidden="true"></i>
+          </div>
+          <h3 class="task-card__header project-header">Diplomski rad</h3>
+          <div class="task-card__progress-bar-container">
+            <div class="progress-bar">
+              <div
+                class="progress-bar-fill"
+                style="width: 90%; background-color: green"
+              ></div>
+            </div>
+          </div>
+        </div>
+        <div class="task-card task-card-project">
+          <div class="task-card__close-container">
+            <i class="fa fa-times task-card__close" aria-hidden="true"></i>
+          </div>
+          <h3 class="task-card__header project-header">
+            Učenje CSS i JavaScript
+          </h3>
+          <div class="task-card__progress-bar-container">
+            <div class="progress-bar">
+              <div
+                class="progress-bar-fill"
+                style="width: 53%; background-color: yellow"
+              ></div>
+            </div>
+          </div>
+        </div>
+        <div class="task-card task-card-project">
+          <div class="task-card__close-container">
+            <i class="fa fa-times task-card__close" aria-hidden="true"></i>
+          </div>
+          <h3 class="task-card__header project-header">Učenje PHP</h3>
+          <div class="task-card__progress-bar-container">
+            <div class="progress-bar">
+              <div
+                class="progress-bar-fill"
+                style="width: 15%; background-color: red"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider-line" />
+
+      <div class="top-bar top-bar-days">
+        <h2 class="top-bar__name">Dani</h2>
+        <i
+          class="fa fa-plus-square top-bar__add-new clickable"
+          id="btn-add-day"
+          aria-hidden="true"
+        ></i>
+      </div>
+      <div class="task-card-container days-container">
+        <div class="task-card task-card-day">
+          <div class="task-card__close-container">
+            <i class="fa fa-times task-card__close" aria-hidden="true"></i>
+          </div>
+          <h3 class="task-card__header day-header">01-06-2021</h3>
+          <div class="task-card__tasks-preview-container">
+            <ul class="tasks-preview">
+              <li>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Dolores, culpa assumenda? Ipsam dolor, voluptatem quam eligendi
+                expedita soluta eaque vero eos iusto sint inventore illo,
+                officia ea, reprehenderit aliquam delectus. Lorem ipsum dolor
+                sit amet consectetur adipisicing elit. Facere magnam vitae
+                asperiores quo nulla, laboriosam corporis in, quibusdam possimus
+                laudantium officiis? Sequi quo qui quibusdam dolor facere
+                dolores mollitia sapiente?
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="task-card task-card-day">
+          <div class="task-card__close-container">
+            <i class="fa fa-times task-card__close" aria-hidden="true"></i>
+          </div>
+          <h3 class="task-card__header day-header">02-06-2021</h3>
+          <div class="task-card__tasks-preview-container">
+            <ul class="tasks-preview">
+              <li>Teretana</li>
+              <li>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Dolores, culpa assumenda? Ipsam dolor, voluptatem quam eligendi
+                expedita soluta eaque vero eos iusto sint inventore illo,
+                officia ea, reprehenderit aliquam delectus.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="task-card task-card-day">
+          <div class="task-card__close-container">
+            <i class="fa fa-times task-card__close" aria-hidden="true"></i>
+          </div>
+          <h3 class="task-card__header day-header">03-06-2021</h3>
+          <div class="task-card__tasks-preview-container">
+            <ul class="tasks-preview">
+              <li>
+                Hrpa dugog teksta koji nije lorem ipsum da vidim hoće li se
+                pseudo element ponašati normalno
+              </li>
+              <li>Dućan</li>
+            </ul>
+          </div>
+        </div>
+        <div class="task-card task-card-day">
+          <div class="task-card__close-container">
+            <i class="fa fa-times task-card__close" aria-hidden="true"></i>
+          </div>
+          <h3 class="task-card__header day-header">04-06-2021</h3>
+          <div class="task-card__tasks-preview-container">
+            <ul class="tasks-preview">
+              <li>Teretana</li>
+              <li>Dućan</li>
+            </ul>
+          </div>
+        </div>
+        <div class="task-card task-card-day">
+          <div class="task-card__close-container">
+            <i class="fa fa-times task-card__close" aria-hidden="true"></i>
+          </div>
+          <h3 class="task-card__header day-header">05-06-2021</h3>
+          <div class="task-card__tasks-preview-container">
+            <ul class="tasks-preview">
+              <li>Teretana</li>
+            </ul>
+          </div>
+        </div>
+        <div class="task-card task-card-day">
+          <div class="task-card__close-container">
+            <i class="fa fa-times task-card__close" aria-hidden="true"></i>
+          </div>
+          <h3 class="task-card__header day-header">06-06-2021</h3>
+          <div class="task-card__tasks-preview-container">
+            <ul class="tasks-preview">
+              <li>Kupi mlijeko</li>
+              <li>Idi u Poreznu upravu</li>
+              <li>Produži vozačku dozvolu.</li>
+              <li>Kuhaj ručak</li>
+              <li>Kupi gume</li>
+              <li>Pelene</li>
+              <li>Teretana.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <p>JustAnotherListApp - Diplomski rad || Domagoj Škender 2021</p>
+    </footer>
+    <div class="overlay hidden"></div>
+
+    <div class="modal admin-modal hidden">
+      <div class="modal__header">
+        <div class="modal__header-title">Administracija</div>
+        <i class="fa fa-times modal__close" aria-hidden="true"></i>
+      </div>
+      <div class="modal__content">
+        <form autocomplete="off" id="admin">
+          <fieldset>
+            <legend>Osnovni podaci</legend>
+            <div class="lbl-inp-pair">
+              <label for="userfname">Ime:</label>
+              <input
+                type="text"
+                name="userfname"
+                id="userfname"
+                placeholder="Student"
+                size="30"
+              />
+            </div>
+
+            <div class="lbl-inp-pair">
+              <label for="userlname">Prezime:</label>
+              <input
+                type="text"
+                name="userlname"
+                id="userlname"
+                placeholder="EFZG"
+                size="30"
+              />
+            </div>
+
+            <div class="lbl-inp-pair">
+              <label for="userprofileimg">Profilna slika:</label>
+              <input
+                type="text"
+                name="userprofileimg"
+                id="userprofileimg"
+                placeholder="www.template.com/profilna.png"
+                size="30"
+              />
+            </div>
+
+            <div class="lbl-inp-pair">
+              <label for="useremail">Email:</label>
+              <input
+                type="text"
+                name="useremail"
+                id="useremail"
+                placeholder="student@net.efzg.hr"
+                size="30"
+              />
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Labele</legend>
+            <div class="lbl-inp-pair">
+              <label
+                for="labelname"
+                title="Labele za označavanje prioriteta/vrste zadataka."
+                >Labela:</label
+              >
+              <input
+                type="text"
+                name="labelname"
+                id="labelname"
+                placeholder="Unesi ime labele..."
+                size="30"
+                maxlength="25"
+              />
+            </div>
+            <div class="lbl-inp-pair">
+              <label
+                for="labelcolor"
+                title="Biraj svjetlije tonove zbog kontrasta s crnim tekstom labela."
+                >Boja labele:</label
+              >
+              <input
+                class="color-picker"
+                type="color"
+                name="labelcolor"
+                id="labelcolor"
+                value="#FF0000"
+              />
+            </div>
+            <div class="form-btn-container">
+              <button class="form-btn" type="button" id="add-lbl-btn">
+                Dodaj labelu
+              </button>
+            </div>
+            <p>Labele - klikni za izbrisati</p>
+            <div class="label-container">
+              <div
+                class="priority-label"
+                id="lbl1"
+                style="background-color: lightgreen"
+              >
+                Manje važno
+              </div>
+              <div
+                class="priority-label"
+                id="lbl2"
+                style="background-color: rgb(228, 247, 60)"
+              >
+                Srednje važno
+              </div>
+              <div
+                class="priority-label"
+                id="lbl3"
+                style="background-color: rgb(238, 81, 53)"
+              >
+                Važno
+              </div>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Početne postavke</legend>
+            <div class="warning-box">
+              <p>
+                Pažnja! <br />
+                Izbor ove opcije briše sve korisničke podatke, dodane projekte,
+                dane i labele.
+              </p>
+            </div>
+            <div class="form-btn-container">
+              <button class="form-btn" type="button" id="reset-all-btn">
+                Izbriši sve
+              </button>
+            </div>
+          </fieldset>
+          <div class="form-btn-container">
+            <button class="form-btn" type="reset" id="admin-save-btn">
+              Spremi
+            </button>
+            <button class="form-btn" type="reset" id="admin-cancel-btn">
+              Odustani
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+
+  <script src="script.js"></script>
+  <script src="data-handling.js"></script>
+  <!--Font awesome 4-->
+  <script src="https://use.fontawesome.com/c190fbd9a0.js"></script>
+</html>
