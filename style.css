@@ -8,6 +8,15 @@
   cursor: pointer;
 }
 
+.italic {
+  font-style: italic;
+}
+
+.bold {
+  font-weight: 600;
+  font-size: 1.1em;
+}
+
 body {
   font-family: 'Montserrat', sans-serif;
   background-color: #fffafb;
@@ -415,7 +424,7 @@ legend {
 fieldset {
   border: 2px dashed #2b2c28;
   padding: 2vh 1.5vh 1vh;
-  margin-bottom: 2.5vh;
+  margin-bottom: 3.5vh;
 }
 
 fieldset > p {
@@ -434,6 +443,11 @@ input {
   height: 4vh;
   font-size: 2vh;
   padding-left: 1vh;
+  border: #2b2c28 solid 2px;
+}
+
+input:focus {
+  box-shadow: 0 0.2vh 1vh rgba(0, 0, 0, 0.25), 0 0.2vh 1vh rgba(0, 0, 0, 0.22);
 }
 
 .lbl-inp-pair {
@@ -445,6 +459,7 @@ input {
 .color-picker {
   width: 10vh;
   padding: 0;
+  border: #2b2c28 solid 2px;
 }
 
 .form-btn-container {
@@ -513,9 +528,9 @@ input {
 
 .warning-box {
   font-size: 2.3vh;
-  margin: 1vh 1vh 2.5vh;
-  line-height: 1.3;
-  padding: 1vh;
+  margin: 1vh 1vh 3.5vh;
+  line-height: 1.5;
+  padding: 1.5vh 1.5vh 2vh;
   background-color: #fffafb;
   border: 3px dashed #ff0000;
 

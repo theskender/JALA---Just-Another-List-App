@@ -38,7 +38,7 @@
       <div class="top-bar">
         <h2 class="top-bar__name">Projekti</h2>
         <i
-          class="fa fa-plus-square top-bar__add-new clickable"
+          class="fa fa-plus-square top-bar__add-new new-project clickable"
           id="btn-add-project"
           aria-hidden="true"
         ></i>
@@ -97,7 +97,7 @@
       <div class="top-bar top-bar-days">
         <h2 class="top-bar__name">Dani</h2>
         <i
-          class="fa fa-plus-square top-bar__add-new clickable"
+          class="fa fa-plus-square top-bar__add-new new-day clickable"
           id="btn-add-day"
           aria-hidden="true"
         ></i>
@@ -202,6 +202,7 @@
     </footer>
     <div class="overlay hidden"></div>
 
+    <!--admin modal-->
     <div class="modal admin-modal hidden">
       <div class="modal__header">
         <div class="modal__header-title">Administracija</div>
@@ -291,7 +292,7 @@
                 Dodaj labelu
               </button>
             </div>
-            <p>Labele - klikni za izbrisati</p>
+            <p>Labele <span class="italic">(klikni za izbrisati)</span></p>
             <div class="label-container">
               <div
                 class="priority-label"
@@ -319,8 +320,8 @@
           <fieldset>
             <legend>Početne postavke</legend>
             <div class="warning-box">
+              <p class="bold">Pažnja!</p>
               <p>
-                Pažnja! <br />
                 Izbor ove opcije briše sve korisničke podatke, dodane projekte,
                 dane i labele.
               </p>

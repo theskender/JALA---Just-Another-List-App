@@ -1,21 +1,33 @@
 'use strict';
+// Save re-usable elements to variables
+let modalCloseBtns;
+const overlay = document.querySelector('.overlay');
+const adminModal = document.querySelector('.admin-modal');
+let newProjectModal;
+let editProjectModal;
+let newDayModal;
+let editDayModal;
+
 // State variables
 let labelIdCounter =
   document.querySelector('.label-container').childElementCount ?? 0;
-
-// Save re-usable elements to variables
-const overlay = document.querySelector('.overlay');
-const adminModal = document.querySelector('.admin-modal');
+let currentModal;
 
 // Add event handlers
 // - admin modal
 document.querySelector('.header-user-pic').addEventListener('click', showAdmin);
 // - 4 ways of closing the modals - need to be tweaked when other modals are added - see how to re-use general modal closing function for all modals
 overlay.addEventListener('click', closeModal);
-document.querySelector('.modal__close').addEventListener('click', closeModal);
+
+modalCloseBtns = document.querySelectorAll('.modal__close');
+for (let i = 0; i < modalCloseBtns.length; i++) {
+  modalCloseBtns[i].addEventListener('click', closeModal);
+}
+
 document
   .querySelector('#admin-cancel-btn')
   .addEventListener('click', closeModal);
+
 document.addEventListener('keydown', function (e) {
   e.preventDefault;
   if (e.key === 'Escape') {
@@ -30,15 +42,31 @@ document
   .addEventListener('click', deleteLabel);
 // - reset button
 document.getElementById('reset-all-btn').addEventListener('click', resetApp);
+// - new project
+document
+  .querySelector('.new-project')
+  .addEventListener('click', showNewProject);
+// - new day
+document.querySelector('.new-day').addEventListener('click', showNewDay);
 
 // Event functions
 function showAdmin() {
   adminModal.classList.remove('hidden');
   overlay.classList.remove('hidden');
+  currentModal = adminModal;
 }
 
+function showNewProject() {}
+
+function showNewDay() {}
+
+function showEditProject() {}
+
+function showEditDay() {}
+
+// This function needs to become universaliyed down the line (work the same for whichever modal is open)
 function closeModal() {
-  adminModal.classList.add('hidden');
+  currentModal.classList.add('hidden');
   overlay.classList.add('hidden');
   document.getElementById('admin').reset();
 }
