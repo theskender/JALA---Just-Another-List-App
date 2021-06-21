@@ -1,19 +1,21 @@
 'use strict';
 // Save re-usable elements to variables
 let modalCloseBtns;
+let taskCardsProjects;
+let taskCardsDay;
 const overlay = document.querySelector('.overlay');
 const adminModal = document.querySelector('.admin-modal');
-let newProjectModal;
-let editProjectModal;
-let newDayModal;
-let editDayModal;
+const newProjectModal = document.querySelector('.new-project-modal');
+const editProjectModal = document.querySelector('.edit-project-modal');
+const newDayModal = document.querySelector('.new-day-modal');
+const editDayModal = document.querySelector('.edit-day-modal');
 
 // State variables
 let labelIdCounter =
   document.querySelector('.label-container').childElementCount ?? 0;
 let currentModal;
 
-// Add event handlers
+///////////////// Add event handlers /////////////////
 // - admin modal
 document.querySelector('.header-user-pic').addEventListener('click', showAdmin);
 // - 4 ways of closing the modals - need to be tweaked when other modals are added - see how to re-use general modal closing function for all modals
@@ -34,6 +36,26 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+
+// - new project
+document
+  .querySelector('.new-project')
+  .addEventListener('click', showNewProject);
+// - new day
+document.querySelector('.new-day').addEventListener('click', showNewDay);
+
+// - edit project
+taskCardsProjects = document.querySelectorAll('.task-card-project');
+for (let i = 0; i < taskCardsProjects.length; i++) {
+  taskCardsProjects[i].addEventListener('click', showEditProject);
+}
+
+// - edit day
+taskCardsDay = document.querySelectorAll('.task-card-day');
+for (let i = 0; i < taskCardsDay.length; i++) {
+  taskCardsDay[i].addEventListener('click', showEditDay);
+}
+
 // - create priority label
 document.querySelector('#add-lbl-btn').addEventListener('click', createLabel);
 // - delete priority label
@@ -42,12 +64,6 @@ document
   .addEventListener('click', deleteLabel);
 // - reset button
 document.getElementById('reset-all-btn').addEventListener('click', resetApp);
-// - new project
-document
-  .querySelector('.new-project')
-  .addEventListener('click', showNewProject);
-// - new day
-document.querySelector('.new-day').addEventListener('click', showNewDay);
 
 // Event functions
 function showAdmin() {
@@ -56,19 +72,36 @@ function showAdmin() {
   currentModal = adminModal;
 }
 
-function showNewProject() {}
+function showNewProject() {
+  newProjectModal.classList.remove('hidden');
+  overlay.classList.remove('hidden');
+  currentModal = newProjectModal;
+}
 
-function showNewDay() {}
+function showNewDay() {
+  newDayModal.classList.remove('hidden');
+  overlay.classList.remove('hidden');
+  currentModal = newDayModal;
+}
 
-function showEditProject() {}
+function showEditProject() {
+  editProjectModal.classList.remove('hidden');
+  overlay.classList.remove('hidden');
+  currentModal = editProjectModal;
+}
 
-function showEditDay() {}
+function showEditDay() {
+  editDayModal.classList.remove('hidden');
+  overlay.classList.remove('hidden');
+  currentModal = editDayModal;
+}
 
 // This function needs to become universaliyed down the line (work the same for whichever modal is open)
 function closeModal() {
   currentModal.classList.add('hidden');
   overlay.classList.add('hidden');
   document.getElementById('admin').reset();
+  currentModal = undefined;
 }
 
 function createLabel() {
