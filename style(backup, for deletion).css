@@ -223,6 +223,13 @@ footer > p {
   font-family: 'Press Start 2P', cursive;
   text-align: center;
   text-shadow: 2px 2px 4px #0000007c;
+
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 
 .task-card-project {
@@ -423,7 +430,7 @@ legend {
 
 fieldset {
   border: 2px dashed #2b2c28;
-  padding: 2vh 1.5vh 1vh;
+  padding: 2vh 2vh 1vh;
   margin-bottom: 3.5vh;
 }
 
@@ -438,16 +445,29 @@ label {
   font-size: 3vh;
 }
 
-input {
+input,
+select {
   float: right;
   height: 4vh;
   font-size: 2vh;
   padding-left: 1vh;
   border: #2b2c28 solid 2px;
+  font-family: 'Montserrat', sans-serif;
 }
 
+select {
+  width: 30vh;
+  font-weight: 400;
+}
+
+select:focus,
 input:focus {
   box-shadow: 0 0.2vh 1vh rgba(0, 0, 0, 0.25), 0 0.2vh 1vh rgba(0, 0, 0, 0.22);
+}
+
+textarea {
+  resize: none;
+  width: 100%;
 }
 
 .lbl-inp-pair {
@@ -502,14 +522,14 @@ input:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1vh;
+  padding: 1vh 1vh 1vh;
   margin: 1vh;
   color: #2b2c28;
   border: 2px solid #2b2c28;
   background-color: #00ffdd;
   border-radius: 20px;
   height: 5vh;
-  font-size: 2.5vh;
+  font-size: 2vh;
   transition: transform 0.4s;
 
   -webkit-user-select: none;
@@ -528,7 +548,7 @@ input:focus {
 
 .warning-box {
   font-size: 2.3vh;
-  margin: 1vh 1vh 3.5vh;
+  margin: 1vh 0 3.5vh;
   line-height: 1.5;
   padding: 1.5vh 1.5vh 2vh;
   background-color: #fffafb;
@@ -706,5 +726,16 @@ input:focus {
     height: 5vh;
     font-size: 2vh;
     padding-left: 1vh;
+  }
+
+  select {
+    width: 100%;
+  }
+
+  .color-picker {
+    float: left;
+    width: 15vh;
+    padding: 0.5vh;
+    border: #2b2c28 solid 1px;
   }
 }

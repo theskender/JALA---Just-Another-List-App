@@ -2,7 +2,7 @@
 // Save re-usable elements to variables
 let modalCloseBtns;
 let taskCardsProjects;
-let taskCardsDay;
+let taskCardsDays;
 const overlay = document.querySelector('.overlay');
 const adminModal = document.querySelector('.admin-modal');
 const newProjectModal = document.querySelector('.new-project-modal');
@@ -45,15 +45,25 @@ document
 document.querySelector('.new-day').addEventListener('click', showNewDay);
 
 // - edit project
-taskCardsProjects = document.querySelectorAll('.task-card-project');
+taskCardsProjects = document.querySelectorAll(
+  '.task-card__progress-bar-container'
+);
 for (let i = 0; i < taskCardsProjects.length; i++) {
   taskCardsProjects[i].addEventListener('click', showEditProject);
 }
 
 // - edit day
-taskCardsDay = document.querySelectorAll('.task-card-day');
-for (let i = 0; i < taskCardsDay.length; i++) {
-  taskCardsDay[i].addEventListener('click', showEditDay);
+taskCardsDays = document.querySelectorAll(
+  '.task-card__tasks-preview-container'
+);
+for (let i = 0; i < taskCardsDays.length; i++) {
+  taskCardsDays[i].addEventListener('click', showEditDay);
+}
+
+// Card delete buttons from main screen
+let cardDeleteBtns = document.querySelectorAll('.task-card__close');
+for (let i = 0; i < cardDeleteBtns.length; i++) {
+  cardDeleteBtns[i].addEventListener('click', deleteModal);
 }
 
 // - create priority label
@@ -65,7 +75,7 @@ document
 // - reset button
 document.getElementById('reset-all-btn').addEventListener('click', resetApp);
 
-// Event functions
+///////////////// Event functions /////////////////
 function showAdmin() {
   adminModal.classList.remove('hidden');
   overlay.classList.remove('hidden');
@@ -96,7 +106,6 @@ function showEditDay() {
   currentModal = editDayModal;
 }
 
-// This function needs to become universaliyed down the line (work the same for whichever modal is open)
 function closeModal() {
   currentModal.classList.add('hidden');
   overlay.classList.add('hidden');
@@ -130,4 +139,11 @@ function resetApp() {
     localStorage.clear();
     alert('Baza očišćena!');
   }
+}
+
+function refreshMainScreen() {}
+
+// Placeholder function, needs to recognize model clicked on
+function deleteModal() {
+  console.log('Deleted!');
 }

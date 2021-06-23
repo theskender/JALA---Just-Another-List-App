@@ -1,0 +1,342 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.bold {
+  font-weight: 600;
+  font-size: 1.1em;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #fffafb;
+}
+
+header {
+  width: 100%;
+  background-color: #2b2c28;
+  position: fixed;
+  top: 0;
+  min-height: fit-content;
+
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.76);
+
+  z-index: 1000;
+}
+
+footer {
+  background-color: #2b2c28;
+  width: 100%;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  top: 100%;
+  height: 6vh;
+  text-align: center;
+  padding: 2vh 0;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+footer > p {
+  color: #fffafb;
+  font-size: 2vh;
+  font-weight: 300;
+  text-shadow: 2px 2px 4px #000000;
+}
+
+/*Scrollbar*/
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #fffafb;
+  border-radius: 10px;
+  box-shadow: inset 0 0 5px grey;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #424240;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #2b2c28;
+}
+
+.dummy {
+  height: 10vh;
+}
+
+.header-logo {
+  height: 6vh;
+  margin-top: 2vh;
+  margin-left: 8vh; /*2 is initial - looks decent*/
+  margin-bottom: 2vh;
+  float: left;
+  transition: transform 1.5s ease-out;
+}
+
+.header-logo:hover {
+  transform: rotateY(540deg) scale(1.45);
+}
+
+.header-title {
+  color: #fffafb;
+  font-weight: 500;
+  font-size: 4.5vh;
+  font-family: 'Press Start 2P', cursive;
+  display: inline;
+  vertical-align: middle;
+  margin-left: 2vh;
+  margin-bottom: 2vh;
+  position: absolute;
+  bottom: 0;
+}
+
+.header-user-info {
+  right: 9vh;
+  height: 10vh;
+  width: 50vh;
+  position: absolute;
+}
+
+.header-user-name {
+  display: inline-block;
+  position: absolute;
+  right: 5vh;
+  bottom: 2vh;
+  font-weight: 300;
+  color: #fffafb;
+  font-size: 4vh;
+  margin-right: 2vh;
+}
+
+.header-user-pic {
+  height: 6vh;
+  border-radius: 50%;
+  margin-left: 10px;
+  bottom: 0;
+  position: absolute;
+  display: inline-block;
+  transition: transform 0.4s;
+}
+
+.header-user-pic:hover {
+  transform: scale(1.15);
+}
+
+.main-content {
+  min-height: 84vh;
+  background-color: #fffafb;
+  width: 80%;
+  margin: auto;
+  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.096);
+  padding-top: 3vh;
+}
+
+.top-bar {
+  background-color: #fffafb;
+  display: block;
+  height: 6vh; /*Probably will remove fixed height*/
+  margin: 1vh 4vh 0;
+  font-size: 5vh;
+
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+.top-bar-days {
+  margin: 4vh 4vh 0;
+}
+
+.top-bar__name {
+  font-weight: 500;
+  font-size: 4vh;
+  font-family: 'Press Start 2P', cursive;
+  color: #2b2c28;
+  float: left;
+}
+
+.top-bar__add-new {
+  font-weight: 500;
+  font-size: 4vh;
+  font-family: 'Press Start 2P', cursive;
+  color: #2b2c28;
+  float: right;
+  transition: transform 0.3s;
+}
+
+.top-bar__add-new:hover {
+  transform: scale(1.3);
+}
+
+.task-card-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: wrap-reverse;
+  justify-content: flex-end;
+  align-items: flex-start;
+  align-content: center;
+  padding-bottom: 3vh;
+}
+
+.task-card {
+  height: 50vh;
+  width: 45vh;
+  margin: 3vh;
+  border-radius: 15px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  font-size: 3vh; /*task-card__close*/
+  font-family: 'Press Start 2P', cursive;
+  text-align: center;
+  text-shadow: 2px 2px 4px #0000007c;
+
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+.task-card-project {
+  background-color: #339989;
+}
+
+.task-card-project:hover {
+  box-shadow: 0 0.5vh 2vh rgba(0, 0, 0, 0.25), 0 0.5vh 2vh rgba(0, 0, 0, 0.22);
+  background-color: #267569;
+}
+
+.task-card-day {
+  background-color: #dd9441;
+}
+
+.task-card-day:hover {
+  box-shadow: 0 0.5vh 2vh rgba(0, 0, 0, 0.25), 0 0.5vh 2vh rgba(0, 0, 0, 0.22);
+  background-color: rgb(218, 123, 15);
+}
+
+.task-card__header {
+  color: #fffafb;
+  font-size: 2.5vh;
+  font-weight: 100;
+  line-height: 1.4;
+  display: inline-block;
+  height: 11vh;
+}
+
+.day-header {
+  height: 8vh;
+}
+
+.task-card__close-container {
+  display: block;
+  height: 5.5vh;
+  width: 100%;
+  padding: 1.5vh 1.5vh 0 0;
+  margin-bottom: 1.5vh;
+}
+
+.task-card__close {
+  cursor: pointer;
+  color: #fffafb;
+  float: right;
+  transition: transform 0.4s;
+}
+
+.task-card__close:hover {
+  transform: scale(1.5);
+  text-shadow: 2px 2px 4px #000000;
+}
+
+.task-card__progress-bar-container {
+  width: 100%;
+  display: flex;
+  height: 29vh;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.progress-bar {
+  width: 70%;
+  height: 8vh;
+  background-color: #fffafb;
+
+  border-radius: 7vh;
+  padding: 1vh;
+  box-shadow: 2px 2px 4px #0000007c;
+}
+
+.progress-bar-fill {
+  /*Background color and width need to change dynamically using JS based on JSON data from LocalStorage*/
+  border-radius: 7vh;
+  width: 0;
+  height: 6vh;
+  background-color: green;
+}
+
+.task-card__tasks-preview-container {
+  width: 100%;
+  height: 33vh;
+  font-size: 1.8vh;
+  padding: 0 2.5vh;
+  color: #fffafb;
+  text-align: left;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.tasks-preview {
+  list-style: none;
+}
+
+.tasks-preview > li {
+  margin: 0 0 2vh 0;
+  line-height: 1.8;
+}
+
+.tasks-preview > li::before {
+  content: '- ';
+}
+
+.divider-line {
+  background-color: #fffafb;
+  border-top: 3px dashed #2b2c28;
+  width: 97%;
+  margin: auto;
+}

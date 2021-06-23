@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JALA</title>
     <meta name="author" content="Domagoj Škender" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="modal-windows.css" />
+    <link rel="stylesheet" href="media-query.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
@@ -350,7 +352,97 @@
         <div class="modal__header-title">Novi projekt</div>
         <i class="fa fa-times modal__close" aria-hidden="true"></i>
       </div>
-      <div class="modal__content"></div>
+      <div class="modal__content">
+        <form autocomplete="off" id="newprojectname">
+          <fieldset>
+            <legend>Novi projekt</legend>
+            <div class="lbl-inp-pair">
+              <label for="projectname">Ime projekta:</label>
+              <input
+                type="text"
+                name="projectname"
+                id="projectname"
+                placeholder="Unesi ime projekta..."
+                size="30"
+                maxlength="50"
+              />
+            </div>
+          </fieldset>
+        </form>
+        <form autocomplete="off" id="taskinput">
+          <fieldset>
+            <legend>Unos zadatka</legend>
+            <div class="lbl-inp-pair">
+              <label for="tasktext">Tekst zadatka:</label>
+              <input
+                type="text"
+                name="tasktext"
+                id="tasktext"
+                placeholder="Unesi tekst zadatka..."
+                size="30"
+              />
+            </div>
+            <!--MUST CONNECT TO LABELS JSON AND DYNAMICALLY REFRESH, THESE ARE PLACEHOLDER OPTIONS-->
+            <div class="lbl-inp-pair">
+              <label for="labelpicker">Izbor labela:</label>
+              <select id="labelpicker" name="labelpicker">
+                <option value="Manje važno">Manje važno</option>
+                <option value="Srednje važno">Srednje važno</option>
+                <option value="Važno">Važno</option>
+              </select>
+            </div>
+            <p>Labele <span class="italic">(klikni za izbrisati)</span></p>
+            <div class="label-container">
+              <div
+                class="priority-label"
+                id="lbl1"
+                style="background-color: lightgreen"
+              >
+                Manje važno
+              </div>
+              <div
+                class="priority-label"
+                id="lbl2"
+                style="background-color: rgb(228, 247, 60)"
+              >
+                Srednje važno
+              </div>
+              <div
+                class="priority-label"
+                id="lbl3"
+                style="background-color: rgb(238, 81, 53)"
+              >
+                Važno
+              </div>
+            </div>
+            <div class="form-btn-container">
+              <button class="form-btn" type="button" id="add-task-btn">
+                Unesi zadatak
+              </button>
+            </div>
+          </fieldset>
+        </form>
+        <form autocomplete="off" id="tasks">
+          <fieldset>
+            <legend>Uneseni zadaci</legend>
+          </fieldset>
+          <fieldset>
+            <legend>Bilješke</legend>
+            <div class="lbl-txt-pair">
+              <label for="notes">Bilješke o projektu:</label>
+              <textarea id="notes" name="notes" placeholder="..."></textarea>
+            </div>
+          </fieldset>
+        </form>
+        <div class="form-btn-container">
+          <button class="form-btn" type="reset" id="project-save-btn">
+            Spremi
+          </button>
+          <button class="form-btn" type="reset" id="project-cancel-btn">
+            Odustani
+          </button>
+        </div>
+      </div>
     </div>
 
     <!--new-day modal-->
