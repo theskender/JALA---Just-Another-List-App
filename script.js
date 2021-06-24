@@ -21,7 +21,7 @@ let labelIdCounter =
 let currentModal;
 
 // Loading animation runs, comment out during development (takes 2s on reload)
-// init();
+init();
 
 ///////////////// Add event handlers /////////////////
 // - admin modal
@@ -97,7 +97,7 @@ function init() {
   setTimeout(function () {
     overlay.classList.add('hidden');
     loadingSpinner.classList.add('hidden');
-  }, 1200);
+  }, 2000);
 }
 
 function showAdmin() {
