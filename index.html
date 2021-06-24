@@ -427,14 +427,24 @@
           <fieldset>
             <legend>Uneseni zadaci</legend>
             <ul class="modal__tasks-container">
-              <li class="modal__task">Kupi piletinu</li>
-              <li class="modal__task">Idi u teretanu</li>
-              <li class="modal__task">Plati faks</li>
-              <li class="modal__task">
+              <li class="modal__task" onclick="togleCheck(this)">
+                Kupi piletinu
+                <span class="remove-task">x</span>
+              </li>
+              <li class="modal__task" onclick="togleCheck(this)">
+                Idi u teretanu
+                <span class="remove-task">x</span>
+              </li>
+              <li class="modal__task" onclick="togleCheck(this)">
+                Plati faks
+                <span class="remove-task">x</span>
+              </li>
+              <li class="modal__task" onclick="togleCheck(this)">
                 Lorem ipsum dolor, sit amet consectetur adipisicing elit.
                 Commodi, minus ea. Repellendus sit nihil saepe atque qui
                 veritatis assumenda expedita inventore commodi nostrum odio,
                 provident quisquam repudiandae eaque odit dolorem!
+                <span class="remove-task">x</span>
               </li>
             </ul>
           </fieldset>

@@ -17,7 +17,7 @@ let labelIdCounter =
   document.querySelector('.label-container').childElementCount ?? 0;
 let currentModal;
 
-// Loading animation runs
+// Loading animation runs, comment out during development (takes 2s on reload)
 // init();
 
 ///////////////// Add event handlers /////////////////
@@ -68,17 +68,27 @@ for (let i = 0; i < taskCardsDays.length; i++) {
 // Card delete buttons from main screen
 let cardDeleteBtns = document.querySelectorAll('.task-card__close');
 for (let i = 0; i < cardDeleteBtns.length; i++) {
-  cardDeleteBtns[i].addEventListener('click', deleteModal);
+  cardDeleteBtns[i].addEventListener('click', deleteTaskCard);
 }
 
-// - create priority label
+// - create priority label - admin
 document.querySelector('#add-lbl-btn').addEventListener('click', createLabel);
-// - delete priority label
+// - delete priority label - admin
 document
   .querySelector('.label-container')
   .addEventListener('click', deleteLabel);
-// - reset button
+// - reset app button
 document.getElementById('reset-all-btn').addEventListener('click', resetApp);
+
+// check/uncheck task
+function togleCheck(element) {
+  element.classList.toggle('checked');
+}
+
+// - remove task
+document
+  .querySelector('.modal__tasks-container')
+  .addEventListener('click', removeTask);
 
 ///////////////// Event functions /////////////////
 function init() {
@@ -143,8 +153,9 @@ function createLabel() {
   }
 }
 
+// Event bubbling - make sure clicking on empty container area doesn't delete container
 function deleteLabel(e) {
-  e.target.remove();
+  if (!e.target.classList.contains('label-container')) e.target.remove();
 }
 
 function resetApp() {
@@ -155,9 +166,21 @@ function resetApp() {
   }
 }
 
+// Create new task
+
+// Remove this task
+function removeTask(e) {
+  if (
+    !e.target.classList.contains('modal__tasks-container') &&
+    !e.target.classList.contains('modal__task')
+  )
+    e.target.parentNode.remove();
+}
+
+// Very important later, reloads cards on main screen after any save/edit/delete all function has been triggered --- potentially will be replaced with methods since cards will become react elements
 function refreshMainScreen() {}
 
-// Placeholder function, needs to recognize model clicked on
-function deleteModal() {
+// Placeholder function, needs to recognize task card clicked on
+function deleteTaskCard() {
   console.log('Deleted!');
 }
