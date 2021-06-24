@@ -203,6 +203,7 @@
       <p>JustAnotherListApp - Diplomski rad || Domagoj Škender 2021</p>
     </footer>
     <div class="overlay hidden"></div>
+    <img class="loading-spinner hidden" src="JALA_Logo_NO_TEXT.svg" alt="" />
 
     <!--admin modal-->
     <div class="modal admin-modal hidden">
@@ -211,7 +212,7 @@
         <i class="fa fa-times modal__close" aria-hidden="true"></i>
       </div>
       <div class="modal__content">
-        <form autocomplete="off" id="admin">
+        <form autocomplete="off" id="admin" name="admin">
           <fieldset>
             <legend>Osnovni podaci</legend>
             <div class="lbl-inp-pair">
@@ -353,7 +354,7 @@
         <i class="fa fa-times modal__close" aria-hidden="true"></i>
       </div>
       <div class="modal__content">
-        <form autocomplete="off" id="newprojectname">
+        <form autocomplete="off" id="newprojectname" name="newprojectname">
           <fieldset>
             <legend>Novi projekt</legend>
             <div class="lbl-inp-pair">
@@ -369,7 +370,7 @@
             </div>
           </fieldset>
         </form>
-        <form autocomplete="off" id="taskinput">
+        <form autocomplete="off" id="taskinput" name="taskinput">
           <fieldset>
             <legend>Unos zadatka</legend>
             <div class="lbl-inp-pair">
@@ -422,9 +423,20 @@
             </div>
           </fieldset>
         </form>
-        <form autocomplete="off" id="tasks">
+        <form autocomplete="off" id="tasks" name="tasks">
           <fieldset>
             <legend>Uneseni zadaci</legend>
+            <ul class="modal__tasks-container">
+              <li class="modal__task">Kupi piletinu</li>
+              <li class="modal__task">Idi u teretanu</li>
+              <li class="modal__task">Plati faks</li>
+              <li class="modal__task">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                Commodi, minus ea. Repellendus sit nihil saepe atque qui
+                veritatis assumenda expedita inventore commodi nostrum odio,
+                provident quisquam repudiandae eaque odit dolorem!
+              </li>
+            </ul>
           </fieldset>
           <fieldset>
             <legend>Bilješke</legend>

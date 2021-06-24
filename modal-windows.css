@@ -10,6 +10,26 @@
   z-index: 5000;
 }
 
+.loading-spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -25vh;
+  margin-left: -25vh;
+  width: 50vh;
+  z-index: 5001;
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotateY(0);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+
 .modal {
   z-index: 6000;
   position: fixed;
@@ -128,7 +148,7 @@ textarea {
   width: 100%;
   height: 20vh;
   font-size: 2vh;
-  border: #2b2c28 solid 2px;
+  border: #2b2c28 solid 1px;
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
   padding: 1vh 1vh 1vh;
@@ -234,4 +254,33 @@ textarea {
 
 .hidden {
   display: none;
+}
+
+.modal__tasks-container {
+  margin: 0;
+  padding: 0;
+}
+
+.modal__tasks-container .modal__task {
+  cursor: pointer;
+  position: relative;
+  padding: 1vh 1vh 1vh 1vh;
+  margin-bottom: 1vh;
+  font-size: 2vh;
+  transition: 0.2s;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.modal__tasks-container .modal__task:hover {
+  background-color: #2b2c28;
+  color: #fffafb;
+}
+
+.modal__tasks-container .modal__task.checked {
+  text-decoration: line-through;
+  font-style: italic;
 }

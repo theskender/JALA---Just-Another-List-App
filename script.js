@@ -1,9 +1,11 @@
 'use strict';
+
 // Save re-usable elements to variables
 let modalCloseBtns;
 let taskCardsProjects;
 let taskCardsDays;
 const overlay = document.querySelector('.overlay');
+const loadingSpinner = document.querySelector('.loading-spinner');
 const adminModal = document.querySelector('.admin-modal');
 const newProjectModal = document.querySelector('.new-project-modal');
 const editProjectModal = document.querySelector('.edit-project-modal');
@@ -14,6 +16,9 @@ const editDayModal = document.querySelector('.edit-day-modal');
 let labelIdCounter =
   document.querySelector('.label-container').childElementCount ?? 0;
 let currentModal;
+
+// Loading animation runs
+// init();
 
 ///////////////// Add event handlers /////////////////
 // - admin modal
@@ -76,6 +81,15 @@ document
 document.getElementById('reset-all-btn').addEventListener('click', resetApp);
 
 ///////////////// Event functions /////////////////
+function init() {
+  overlay.classList.remove('hidden');
+  loadingSpinner.classList.remove('hidden');
+  setTimeout(function () {
+    overlay.classList.add('hidden');
+    loadingSpinner.classList.add('hidden');
+  }, 1200);
+}
+
 function showAdmin() {
   adminModal.classList.remove('hidden');
   overlay.classList.remove('hidden');
