@@ -171,4 +171,8 @@
     padding: 0.5vh;
     border: #2b2c28 solid 1px;
   }
+
+  .modal__task > .priority-label {
+    border: 1px solid #2b2c28;
+  }
 }

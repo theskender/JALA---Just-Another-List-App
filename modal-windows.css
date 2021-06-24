@@ -273,6 +273,7 @@ textarea {
   margin-bottom: 1vh;
   font-size: 2vh;
   transition: 0.2s;
+  line-height: 1.5;
 
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -323,4 +324,17 @@ textarea {
   transform: scale(1.5);
   font-weight: 400;
   padding-top: 0;
+}
+
+.modal__task > .priority-label {
+  display: inline;
+  width: fit-content;
+  padding: 0 1vh 0;
+  margin: 0 1vh 0;
+  height: 1.5vh;
+  font-size: 1.5vh;
+}
+
+.modal__tasks-container .modal__task.checked .priority-label {
+  font-style: normal;
 }
