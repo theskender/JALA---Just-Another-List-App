@@ -296,29 +296,7 @@
               </button>
             </div>
             <p>Labele <span class="italic">(klikni za izbrisati)</span></p>
-            <div class="label-container">
-              <div
-                class="priority-label"
-                id="lbl1"
-                style="background-color: lightgreen"
-              >
-                Manje važno
-              </div>
-              <div
-                class="priority-label"
-                id="lbl2"
-                style="background-color: rgb(228, 247, 60)"
-              >
-                Srednje važno
-              </div>
-              <div
-                class="priority-label"
-                id="lbl3"
-                style="background-color: rgb(238, 81, 53)"
-              >
-                Važno
-              </div>
-            </div>
+            <div class="label-container"></div>
           </fieldset>
           <fieldset>
             <legend>Početne postavke</legend>
@@ -392,7 +370,10 @@
                 <option value="Važno">Važno</option>
               </select>
             </div>
-            <p>Labele <span class="italic">(klikni za izbrisati)</span></p>
+            <p>
+              Labele za zadatak
+              <span class="italic">(klikni za izbrisati)</span>
+            </p>
             <div class="label-container">
               <div
                 class="priority-label"
@@ -426,27 +407,7 @@
         <form autocomplete="off" id="tasks" name="tasks">
           <fieldset>
             <legend>Uneseni zadaci</legend>
-            <ul class="modal__tasks-container">
-              <li class="modal__task" onclick="togleCheck(this)">
-                Kupi piletinu
-                <span class="remove-task">x</span>
-              </li>
-              <li class="modal__task" onclick="togleCheck(this)">
-                Idi u teretanu
-                <span class="remove-task">x</span>
-              </li>
-              <li class="modal__task" onclick="togleCheck(this)">
-                Plati faks
-                <span class="remove-task">x</span>
-              </li>
-              <li class="modal__task" onclick="togleCheck(this)">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Commodi, minus ea. Repellendus sit nihil saepe atque qui
-                veritatis assumenda expedita inventore commodi nostrum odio,
-                provident quisquam repudiandae eaque odit dolorem!
-                <span class="remove-task">x</span>
-              </li>
-            </ul>
+            <ul class="modal__tasks-container"></ul>
           </fieldset>
           <fieldset>
             <legend>Bilješke</legend>

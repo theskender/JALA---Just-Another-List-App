@@ -113,27 +113,29 @@ fieldset {
 
 fieldset > p {
   float: left;
-  font-size: 3vh;
-  margin-bottom: 2vh;
+  font-size: 2.5vh;
+  margin-bottom: 1vh;
 }
 
 label {
   float: left;
-  font-size: 3vh;
+  font-size: 2.5vh;
+  margin-top: 1vh;
 }
 
 input,
 select {
   float: right;
-  height: 4vh;
-  font-size: 2vh;
+  margin-top: 0.5vh;
+  height: 3.5vh;
+  font-size: 1.5vh;
   padding-left: 1vh;
   border: #2b2c28 solid 2px;
   font-family: 'Montserrat', sans-serif;
+  width: 30vh;
 }
 
 select {
-  width: 30vh;
   font-weight: 400;
 }
 
@@ -218,8 +220,8 @@ textarea {
   border: 2px solid #2b2c28;
   background-color: #00ffdd;
   border-radius: 20px;
-  height: 5vh;
-  font-size: 2vh;
+  height: 4.5vh;
+  font-size: 1.5vh;
   font-weight: 700;
   transition: transform 0.4s;
 
@@ -260,6 +262,7 @@ textarea {
 .modal__tasks-container {
   margin: 0;
   padding: 0;
+  min-height: 2vh;
 }
 
 .modal__tasks-container .modal__task {
@@ -280,6 +283,10 @@ textarea {
 .modal__tasks-container .modal__task:hover {
   background-color: #2b2c28;
   color: #fffafb;
+}
+
+.modal__tasks-container .modal__task.checked .remove-task {
+  font-style: normal;
 }
 
 .modal__tasks-container .modal__task.checked {

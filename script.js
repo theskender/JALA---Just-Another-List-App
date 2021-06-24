@@ -4,6 +4,7 @@
 let modalCloseBtns;
 let taskCardsProjects;
 let taskCardsDays;
+const addTaskBtn = document.querySelector('#add-task-btn');
 const overlay = document.querySelector('.overlay');
 const loadingSpinner = document.querySelector('.loading-spinner');
 const adminModal = document.querySelector('.admin-modal');
@@ -11,6 +12,8 @@ const newProjectModal = document.querySelector('.new-project-modal');
 const editProjectModal = document.querySelector('.edit-project-modal');
 const newDayModal = document.querySelector('.new-day-modal');
 const editDayModal = document.querySelector('.edit-day-modal');
+const projectCancelBtn = document.querySelector('#project-cancel-btn');
+const adminCancelBtn = document.querySelector('#admin-cancel-btn');
 
 // State variables
 let labelIdCounter =
@@ -31,9 +34,8 @@ for (let i = 0; i < modalCloseBtns.length; i++) {
   modalCloseBtns[i].addEventListener('click', closeModal);
 }
 
-document
-  .querySelector('#admin-cancel-btn')
-  .addEventListener('click', closeModal);
+adminCancelBtn.addEventListener('click', closeModal);
+projectCancelBtn.addEventListener('click', closeModal);
 
 document.addEventListener('keydown', function (e) {
   e.preventDefault;
@@ -80,10 +82,8 @@ document
 // - reset app button
 document.getElementById('reset-all-btn').addEventListener('click', resetApp);
 
-// check/uncheck task
-function togleCheck(element) {
-  element.classList.toggle('checked');
-}
+// - add task
+addTaskBtn.addEventListener('click', addTask);
 
 // - remove task
 document
@@ -134,6 +134,9 @@ function closeModal() {
   currentModal.classList.add('hidden');
   overlay.classList.add('hidden');
   document.getElementById('admin').reset();
+  document.getElementById('newprojectname').reset();
+  document.getElementById('taskinput').reset();
+  document.getElementById('tasks').reset();
   currentModal = undefined;
 }
 
@@ -166,7 +169,26 @@ function resetApp() {
   }
 }
 
-// Create new task
+// Create new task --- TO REVAMP IN REACT
+function addTask() {
+  let taskText = document.querySelector('#tasktext').value;
+  if (taskText) {
+    const element = document.createElement('LI');
+    const xBtn = document.createElement('SPAN');
+    element.classList.add('modal__task');
+    xBtn.classList.add('remove-task');
+    let textNode = document.createTextNode(taskText);
+    let xBtnText = document.createTextNode('x');
+    xBtn.appendChild(xBtnText);
+    element.appendChild(textNode);
+    element.appendChild(xBtn);
+    element.onclick = function () {
+      this.classList.toggle('checked');
+    };
+    document.querySelector('.modal__tasks-container').appendChild(element);
+    document.querySelector('#tasktext').value = '';
+  }
+}
 
 // Remove this task
 function removeTask(e) {
