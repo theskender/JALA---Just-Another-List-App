@@ -140,6 +140,7 @@ footer > p {
 
 .header-user-pic {
   height: 6vh;
+  width: 6vh;
   border-radius: 50%;
   margin-left: 10px;
   bottom: 0;

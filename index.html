@@ -216,46 +216,49 @@
           <fieldset>
             <legend>Osnovni podaci</legend>
             <div class="lbl-inp-pair">
-              <label for="userfname">Ime:</label>
+              <label for="firstName">Ime:</label>
               <input
                 type="text"
-                name="userfname"
-                id="userfname"
+                name="firstName"
+                id="firstName"
                 placeholder="Student"
                 size="30"
+                maxlength="100"
               />
             </div>
 
             <div class="lbl-inp-pair">
-              <label for="userlname">Prezime:</label>
+              <label for="lastName">Prezime:</label>
               <input
                 type="text"
-                name="userlname"
-                id="userlname"
+                name="lastName"
+                id="lastName"
                 placeholder="EFZG"
                 size="30"
+                maxlength="100"
               />
             </div>
 
             <div class="lbl-inp-pair">
-              <label for="userprofileimg">Profilna slika:</label>
+              <label for="profilePicUrl">Profilna slika:</label>
               <input
                 type="text"
-                name="userprofileimg"
-                id="userprofileimg"
+                name="profilePicUrl"
+                id="profilePicUrl"
                 placeholder="www.template.com/profilna.png"
                 size="30"
               />
             </div>
 
             <div class="lbl-inp-pair">
-              <label for="useremail">Email:</label>
+              <label for="userEmail">Email:</label>
               <input
-                type="text"
-                name="useremail"
-                id="useremail"
+                type="email"
+                name="userEmail"
+                id="userEmail"
                 placeholder="student@net.efzg.hr"
                 size="30"
+                maxlength="100"
               />
             </div>
           </fieldset>
@@ -263,14 +266,14 @@
             <legend>Labele</legend>
             <div class="lbl-inp-pair">
               <label
-                for="labelname"
+                for="labelName"
                 title="Labele za označavanje prioriteta/vrste zadataka."
                 >Labela:</label
               >
               <input
                 type="text"
-                name="labelname"
-                id="labelname"
+                name="labelName"
+                id="labelName"
                 placeholder="Unesi ime labele..."
                 size="30"
                 maxlength="25"
@@ -278,15 +281,15 @@
             </div>
             <div class="lbl-inp-pair">
               <label
-                for="labelcolor"
+                for="labelColor"
                 title="Biraj svjetlije tonove zbog kontrasta s crnim tekstom labela."
                 >Boja labele:</label
               >
               <input
                 class="color-picker"
                 type="color"
-                name="labelcolor"
-                id="labelcolor"
+                name="labelColor"
+                id="labelColor"
                 value="#FF0000"
               />
             </div>
@@ -296,7 +299,7 @@
               </button>
             </div>
             <p>Labele <span class="italic">(klikni za izbrisati)</span></p>
-            <div class="label-container"></div>
+            <div class="label-container admin__label-container"></div>
           </fieldset>
           <fieldset>
             <legend>Početne postavke</legend>
@@ -314,7 +317,7 @@
             </div>
           </fieldset>
           <div class="form-btn-container">
-            <button class="form-btn" type="reset" id="admin-save-btn">
+            <button class="form-btn" type="button" id="admin-save-btn">
               Spremi
             </button>
             <button class="form-btn" type="reset" id="admin-cancel-btn">

@@ -14,6 +14,7 @@ const newDayModal = document.querySelector('.new-day-modal');
 const editDayModal = document.querySelector('.edit-day-modal');
 const projectCancelBtn = document.querySelector('#project-cancel-btn');
 const adminCancelBtn = document.querySelector('#admin-cancel-btn');
+const adminSaveBtn = document.querySelector('#admin-save-btn');
 
 // State variables
 let labelIdCounter =
@@ -21,10 +22,10 @@ let labelIdCounter =
 let currentModal;
 
 // Loading animation runs, comment out during development (takes 2s on reload)
-init();
+// init();
 
 ///////////////// Add event handlers /////////////////
-// - admin modal
+// admin modal
 document.querySelector('.header-user-pic').addEventListener('click', showAdmin);
 // - 4 ways of closing the modals - need to be tweaked when other modals are added - see how to re-use general modal closing function for all modals
 overlay.addEventListener('click', closeModal);
@@ -43,15 +44,18 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+// - save changes
+adminSaveBtn.addEventListener('click', saveAdmin);
 
-// - new project
+// - neProject modal
 document
   .querySelector('.new-project')
   .addEventListener('click', showNewProject);
-// - new day
+
+// newDay modal
 document.querySelector('.new-day').addEventListener('click', showNewDay);
 
-// - edit project
+// editProject modal
 taskCardsProjects = document.querySelectorAll(
   '.task-card__progress-bar-container'
 );
@@ -59,7 +63,7 @@ for (let i = 0; i < taskCardsProjects.length; i++) {
   taskCardsProjects[i].addEventListener('click', showEditProject);
 }
 
-// - edit day
+// editDay modal
 taskCardsDays = document.querySelectorAll(
   '.task-card__tasks-preview-container'
 );
@@ -103,6 +107,7 @@ function init() {
 function showAdmin() {
   adminModal.classList.remove('hidden');
   overlay.classList.remove('hidden');
+  loadAdmin();
   currentModal = adminModal;
 }
 
@@ -130,6 +135,7 @@ function showEditDay() {
   currentModal = editDayModal;
 }
 
+// Labels in label container need to be cleared, needs to be added to this function as they're not part of form and not affected by reset()
 function closeModal() {
   currentModal.classList.add('hidden');
   overlay.classList.add('hidden');
@@ -161,11 +167,13 @@ function deleteLabel(e) {
   if (!e.target.classList.contains('label-container')) e.target.remove();
 }
 
+// Refresh function needs to be called here when implemented
 function resetApp() {
   let decision = confirm('Jeste li sigurni?');
   if (decision == true) {
     localStorage.clear();
     alert('Baza očišćena!');
+    closeModal();
   }
 }
 
@@ -202,7 +210,45 @@ function removeTask(e) {
 // Very important later, reloads cards on main screen after any save/edit/delete all function has been triggered --- potentially will be replaced with methods since cards will become react elements
 function refreshMainScreen() {}
 
-// Placeholder function, needs to recognize task card clicked on
+// Placeholder function, needs to recognize task card clicked on - check previously used functions for deleting parent nodes (might be 2 levels up)
 function deleteTaskCard() {
   console.log('Deleted!');
 }
+
+//// Saving data from forms in modals to LS
+// Save user data and labels from admin form
+function saveAdmin() {
+  const userInput = Array.from(document.querySelectorAll('#admin input'));
+  let workMap = new Map();
+  for (const [index, formItem] of userInput.entries()) {
+    if (formItem.value == '') formItem.value = '-';
+    workMap.set(formItem.id, formItem.value);
+  }
+  // remove values not stored directly in base
+  workMap.delete('labelColor');
+  workMap.delete('labelName');
+  // store to LS
+  let userDataObj = {};
+  userDataObj = Object.fromEntries(workMap);
+  localStorage.setItem('userData', JSON.stringify(userDataObj));
+  // Change FE elements and alert user
+  // document.querySelector('.header-user-pic').src = userDataObj.profilePicUrl;
+  alert('Korisnički podaci uspješno izmijenjeni!');
+}
+
+///// Loading LS data on change || when opening forms
+// admin modal fill values if available
+function loadAdmin() {
+  const userDataObj = JSON.parse(localStorage.getItem('userData'));
+  const userDataArr = Object.entries(userDataObj);
+  for (const [label, input] of userDataArr) {
+    document.getElementById(label).value = input;
+  }
+}
+
+// function loadFE() {
+//   const userDataObj = JSON.parse(localStorage.getItem('userData'));
+//   document.querySelector('.header-user-pic').src = userDataObj.profilePicUrl;
+//   document.querySelector('.header-user-name').textContent =
+//     userDataObj.firstName;
+// }
