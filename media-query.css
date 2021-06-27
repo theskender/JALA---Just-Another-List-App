@@ -27,15 +27,16 @@
   .header-user-info {
     right: 0;
     height: 8vh;
-    width: 20vh;
-    position: absolute;
+    width: 30vw;
   }
 
   .header-user-name {
     font-size: 2vh;
+    bottom: 2vh;
   }
   .header-user-pic {
-    height: 4vh;
+    height: 6vh;
+    top: 1vh;
   }
   .main-content {
     width: 100%;

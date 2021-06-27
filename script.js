@@ -232,7 +232,7 @@ function saveAdmin() {
   userDataObj = Object.fromEntries(workMap);
   localStorage.setItem('userData', JSON.stringify(userDataObj));
   // Change FE elements and alert user
-  // document.querySelector('.header-user-pic').src = userDataObj.profilePicUrl;
+  loadFE();
   alert('Korisnički podaci uspješno izmijenjeni!');
 }
 
@@ -240,15 +240,21 @@ function saveAdmin() {
 // admin modal fill values if available
 function loadAdmin() {
   const userDataObj = JSON.parse(localStorage.getItem('userData'));
-  const userDataArr = Object.entries(userDataObj);
-  for (const [label, input] of userDataArr) {
-    document.getElementById(label).value = input;
+  if (userDataObj) {
+    const userDataArr = Object.entries(userDataObj);
+    for (const [label, input] of userDataArr) {
+      document.getElementById(label).value = input;
+    }
   }
 }
 
-// function loadFE() {
-//   const userDataObj = JSON.parse(localStorage.getItem('userData'));
-//   document.querySelector('.header-user-pic').src = userDataObj.profilePicUrl;
-//   document.querySelector('.header-user-name').textContent =
-//     userDataObj.firstName;
-// }
+function loadFE() {
+  const userDataObj = JSON.parse(localStorage.getItem('userData'));
+  if (userDataObj.profilePicUrl) {
+    document.querySelector('.header-user-pic').src = userDataObj.profilePicUrl;
+  }
+  // if (userDataObj.firstName) {
+  //   document.querySelector('.header-user-name').textContent =
+  //     userDataObj.firstName;
+  // }
+}
