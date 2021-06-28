@@ -23,6 +23,7 @@ let currentModal;
 
 // Loading animation runs, comment out during development (takes 2s on reload)
 // init();
+loadFE();
 
 ///////////////// Add event handlers /////////////////
 // admin modal
@@ -105,10 +106,10 @@ function init() {
 }
 
 function showAdmin() {
+  currentModal = adminModal;
   adminModal.classList.remove('hidden');
   overlay.classList.remove('hidden');
   loadAdmin();
-  currentModal = adminModal;
 }
 
 function showNewProject() {
@@ -143,12 +144,14 @@ function closeModal() {
   document.getElementById('newprojectname').reset();
   document.getElementById('taskinput').reset();
   document.getElementById('tasks').reset();
-  currentModal = undefined;
+  const labelContainer = document.querySelector('.label-container');
+  labelContainer.innerHTML = '';
+  // currentModal = undefined;
 }
 
 function createLabel() {
   let color = document.querySelector('.color-picker').value;
-  let text = document.querySelector('#labelname').value;
+  let text = document.querySelector('#labelName').value;
   if (text) {
     const element = document.createElement('DIV');
     element.classList.add('priority-label');
@@ -158,7 +161,7 @@ function createLabel() {
     let textNode = document.createTextNode(text);
     element.appendChild(textNode);
     document.querySelector('.label-container').appendChild(element);
-    document.querySelector('#labelname').value = '';
+    document.querySelector('#labelName').value = '';
   }
 }
 
@@ -174,6 +177,7 @@ function resetApp() {
     localStorage.clear();
     alert('Baza očišćena!');
     closeModal();
+    resetFE();
   }
 }
 
@@ -227,13 +231,27 @@ function saveAdmin() {
   // remove values not stored directly in base
   workMap.delete('labelColor');
   workMap.delete('labelName');
+  // Get inputed labels
+  let userLabels = Array.from(
+    document.querySelectorAll('#admin__label-container .priority-label')
+  );
+  let labelArr = [];
+  for (const [index, label] of userLabels.entries()) {
+    labelArr.push({
+      id: label.id,
+      text: label.textContent,
+      color: label.style.backgroundColor,
+    });
+  }
+
   // store to LS
   let userDataObj = {};
   userDataObj = Object.fromEntries(workMap);
+  userDataObj.priorityLabels = labelArr;
   localStorage.setItem('userData', JSON.stringify(userDataObj));
-  // Change FE elements and alert user
+  // Change FE elements
   loadFE();
-  alert('Korisnički podaci uspješno izmijenjeni!');
+  closeModal();
 }
 
 ///// Loading LS data on change || when opening forms
@@ -243,18 +261,40 @@ function loadAdmin() {
   if (userDataObj) {
     const userDataArr = Object.entries(userDataObj);
     for (const [label, input] of userDataArr) {
+      if (label == 'priorityLabels') continue;
       document.getElementById(label).value = input;
     }
+    loadLabels();
   }
 }
 
 function loadFE() {
   const userDataObj = JSON.parse(localStorage.getItem('userData'));
-  if (userDataObj.profilePicUrl) {
+  if (userDataObj) {
     document.querySelector('.header-user-pic').src = userDataObj.profilePicUrl;
   }
-  // if (userDataObj.firstName) {
-  //   document.querySelector('.header-user-name').textContent =
-  //     userDataObj.firstName;
-  // }
+  if (userDataObj) {
+    document.querySelector('.header-user-name').textContent =
+      userDataObj.firstName;
+  }
+}
+
+function resetFE() {
+  document.querySelector('.header-user-pic').src = '';
+  document.querySelector('.header-user-name').textContent = '';
+}
+
+function loadLabels() {
+  const userDataObj = JSON.parse(localStorage.getItem('userData'));
+  const labels = userDataObj.priorityLabels;
+  const labelContainer = document.querySelector('.label-container');
+  for (const label of labels) {
+    const element = document.createElement('DIV');
+    let textNode = document.createTextNode(label.text);
+    element.classList.add('priority-label');
+    element.style.backgroundColor = label.color;
+    element.id = label.id;
+    element.appendChild(textNode);
+    labelContainer.appendChild(element);
+  }
 }
