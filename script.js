@@ -20,6 +20,7 @@ const adminSaveBtn = document.querySelector('#admin-save-btn');
 let labelIdCounter =
   document.querySelector('.label-container').childElementCount ?? 0;
 let currentModal;
+let currentModalPrefix = '';
 
 // Loading animation runs, comment out during development (takes 2s on reload)
 // init();
@@ -107,33 +108,39 @@ function init() {
 
 function showAdmin() {
   currentModal = adminModal;
+  currentModalPrefix = 'admin-modal';
   adminModal.classList.remove('hidden');
   overlay.classList.remove('hidden');
   loadAdmin();
 }
 
 function showNewProject() {
+  currentModal = newProjectModal;
+  currentModalPrefix = 'new-project-modal';
   newProjectModal.classList.remove('hidden');
   overlay.classList.remove('hidden');
-  currentModal = newProjectModal;
+  loadNewProject();
 }
 
 function showNewDay() {
+  currentModal = newDayModal;
+  currentModalPrefix = 'new-day-modal';
   newDayModal.classList.remove('hidden');
   overlay.classList.remove('hidden');
-  currentModal = newDayModal;
 }
 
 function showEditProject() {
+  currentModal = editProjectModal;
+  currentModalPrefix = 'edit-project-modal';
   editProjectModal.classList.remove('hidden');
   overlay.classList.remove('hidden');
-  currentModal = editProjectModal;
 }
 
 function showEditDay() {
+  currentModal = editDayModal;
+  currentModalPrefix = 'edit-day-modal';
   editDayModal.classList.remove('hidden');
   overlay.classList.remove('hidden');
-  currentModal = editDayModal;
 }
 
 // Labels in label container need to be cleared, needs to be added to this function as they're not part of form and not affected by reset()
@@ -144,9 +151,11 @@ function closeModal() {
   document.getElementById('newprojectname').reset();
   document.getElementById('taskinput').reset();
   document.getElementById('tasks').reset();
-  const labelContainer = document.querySelector('.label-container');
+  const labelContainerSelector = `#${currentModalPrefix}__label-container`;
+  const labelContainer = document.querySelector(labelContainerSelector);
   labelContainer.innerHTML = '';
   // currentModal = undefined;
+  currentModalPrefix = '';
 }
 
 function createLabel() {
@@ -219,8 +228,8 @@ function deleteTaskCard() {
   console.log('Deleted!');
 }
 
-//// Saving data from forms in modals to LS
-// Save user data and labels from admin form
+/////// Saving data from forms in modals to LS
+/// - save user data and labels from admin form
 function saveAdmin() {
   const userInput = Array.from(document.querySelectorAll('#admin input'));
   let workMap = new Map();
@@ -233,7 +242,7 @@ function saveAdmin() {
   workMap.delete('labelName');
   // Get inputed labels
   let userLabels = Array.from(
-    document.querySelectorAll('#admin__label-container .priority-label')
+    document.querySelectorAll('#admin-modal__label-container .priority-label')
   );
   let labelArr = [];
   for (const [index, label] of userLabels.entries()) {
@@ -254,8 +263,7 @@ function saveAdmin() {
   closeModal();
 }
 
-///// Loading LS data on change || when opening forms
-// admin modal fill values if available
+/////// Loading LS data on change || when opening forms
 function loadAdmin() {
   const userDataObj = JSON.parse(localStorage.getItem('userData'));
   if (userDataObj) {
@@ -267,6 +275,16 @@ function loadAdmin() {
     loadLabels();
   }
 }
+
+function loadNewProject() {
+  loadLabels();
+}
+
+function loadEditProject() {}
+
+function loadNewDay() {}
+
+function loadEditDay() {}
 
 function loadFE() {
   const userDataObj = JSON.parse(localStorage.getItem('userData'));
@@ -284,10 +302,12 @@ function resetFE() {
   document.querySelector('.header-user-name').textContent = '';
 }
 
+// make universal for all modals
 function loadLabels() {
   const userDataObj = JSON.parse(localStorage.getItem('userData'));
   const labels = userDataObj.priorityLabels;
-  const labelContainer = document.querySelector('.label-container');
+  const labelContainerSelector = `#${currentModalPrefix}__label-container`;
+  const labelContainer = document.querySelector(labelContainerSelector);
   for (const label of labels) {
     const element = document.createElement('DIV');
     let textNode = document.createTextNode(label.text);
