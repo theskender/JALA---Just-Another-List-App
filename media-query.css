@@ -25,7 +25,7 @@
   }
 
   .header-user-info {
-    right: 0;
+    right: 1vh;
     height: 8vh;
     width: 50vw;
   }
@@ -175,5 +175,9 @@
 
   .modal__task > .priority-label {
     border: 1px solid #2b2c28;
+  }
+
+  .modal__tasks-container .modal__task.checked::before {
+    margin-top: 2.2vh;
   }
 }

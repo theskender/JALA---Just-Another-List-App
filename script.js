@@ -79,12 +79,6 @@ for (let i = 0; i < cardDeleteBtns.length; i++) {
   cardDeleteBtns[i].addEventListener('click', deleteTaskCard);
 }
 
-// - create priority label - admin
-document.querySelector('#add-lbl-btn').addEventListener('click', createLabel);
-// - delete priority label - admin
-document
-  .querySelector('.label-container')
-  .addEventListener('click', deleteLabel);
 // - reset app button
 document.getElementById('reset-all-btn').addEventListener('click', resetApp);
 
@@ -112,6 +106,10 @@ function showAdmin() {
   adminModal.classList.remove('hidden');
   overlay.classList.remove('hidden');
   loadAdmin();
+  document
+    .querySelector('#admin-modal__label-container')
+    .addEventListener('click', deleteLabel);
+  document.querySelector('#add-lbl-btn').addEventListener('click', createLabel);
 }
 
 function showNewProject() {
@@ -156,6 +154,13 @@ function closeModal() {
   labelContainer.innerHTML = '';
   // currentModal = undefined;
   currentModalPrefix = '';
+
+  document
+    .querySelector('#admin-modal__label-container')
+    .removeEventListener('click', deleteLabel);
+  document
+    .querySelector('#add-lbl-btn')
+    .removeEventListener('click', createLabel);
 }
 
 function createLabel() {
@@ -196,12 +201,15 @@ function addTask() {
   if (taskText) {
     const element = document.createElement('LI');
     const xBtn = document.createElement('SPAN');
+    const lblCont = document.createElement('DIV');
     element.classList.add('modal__task');
     xBtn.classList.add('remove-task');
+    lblCont.classList.add('.label-container');
     let textNode = document.createTextNode(taskText);
     let xBtnText = document.createTextNode('x');
     xBtn.appendChild(xBtnText);
     element.appendChild(textNode);
+    element.appendChild(lblCont);
     element.appendChild(xBtn);
     element.onclick = function () {
       this.classList.toggle('checked');
@@ -213,11 +221,8 @@ function addTask() {
 
 // Remove this task
 function removeTask(e) {
-  if (
-    !e.target.classList.contains('modal__tasks-container') &&
-    !e.target.classList.contains('modal__task')
-  )
-    e.target.parentNode.remove();
+  const classes = e.target.classList;
+  if (classes.contains('remove-task')) e.target.parentNode.remove();
 }
 
 // Very important later, reloads cards on main screen after any save/edit/delete all function has been triggered --- potentially will be replaced with methods since cards will become react elements
@@ -228,6 +233,7 @@ function deleteTaskCard() {
   console.log('Deleted!');
 }
 
+/////////////////////////// Data handling ///////////////////////////
 /////// Saving data from forms in modals to LS
 /// - save user data and labels from admin form
 function saveAdmin() {
@@ -252,7 +258,6 @@ function saveAdmin() {
       color: label.style.backgroundColor,
     });
   }
-
   // store to LS
   let userDataObj = {};
   userDataObj = Object.fromEntries(workMap);
@@ -302,7 +307,7 @@ function resetFE() {
   document.querySelector('.header-user-name').textContent = '';
 }
 
-// make universal for all modals
+// universal for all modals
 function loadLabels() {
   const userDataObj = JSON.parse(localStorage.getItem('userData'));
   const labels = userDataObj.priorityLabels;
