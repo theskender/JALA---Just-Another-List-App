@@ -278,11 +278,6 @@ textarea {
   font-size: 2vh;
   transition: 0.2s;
   line-height: 1.5;
-
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 }
 
 .modal__tasks-container .modal__task:hover {

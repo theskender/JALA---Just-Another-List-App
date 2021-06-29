@@ -17,13 +17,11 @@ const adminCancelBtn = document.querySelector('#admin-cancel-btn');
 const adminSaveBtn = document.querySelector('#admin-save-btn');
 
 // State variables
-let labelIdCounter =
-  document.querySelector('.label-container').childElementCount ?? 0;
 let currentModal;
 let currentModalPrefix = '';
 
 // Loading animation runs, comment out during development (takes 2s on reload)
-// init();
+init();
 loadFE();
 
 ///////////////// Add event handlers /////////////////
@@ -92,12 +90,22 @@ document
 
 ///////////////// Event functions /////////////////
 function init() {
-  overlay.classList.remove('hidden');
-  loadingSpinner.classList.remove('hidden');
-  setTimeout(function () {
-    overlay.classList.add('hidden');
-    loadingSpinner.classList.add('hidden');
-  }, 2000);
+  // loading animation - fixed time, can be tied to data loading from server request
+  // overlay.classList.remove('hidden');
+  // loadingSpinner.classList.remove('hidden');
+  // setTimeout(function () {
+  //   overlay.classList.add('hidden');
+  //   loadingSpinner.classList.add('hidden');
+  // }, 2000);
+  // initialize service data object from LS
+  let service = {
+    labelIdCounter: 0,
+    projectsIdCounter: 0,
+    daysIdCounter: 0,
+  };
+  if (localStorage.getItem('service') === null) {
+    localStorage.setItem('service', JSON.stringify(service));
+  }
 }
 
 function showAdmin() {
@@ -160,7 +168,7 @@ function closeModal() {
   labelContainer.innerHTML = '';
   // currentModal = undefined;
   currentModalPrefix = '';
-
+  // remove unnecessary event listeners for closed modals
   document
     .querySelector('#admin-modal__label-container')
     .removeEventListener('click', deleteLabel);
@@ -176,21 +184,25 @@ function createLabel() {
   let color = document.querySelector('.color-picker').value;
   let text = document.querySelector('#labelName').value;
   if (text) {
+    let serviceObj = JSON.parse(localStorage.getItem('service'));
     const element = document.createElement('DIV');
     element.classList.add('priority-label');
     element.style.backgroundColor = color;
-    labelIdCounter++;
-    element.id = `lbl${labelIdCounter}`;
-    let textNode = document.createTextNode(text);
+    serviceObj.labelIdCounter++;
+    element.id = `lbl${serviceObj.labelIdCounter}`;
+    const textNode = document.createTextNode(text);
     element.appendChild(textNode);
     document.querySelector('.label-container').appendChild(element);
     document.querySelector('#labelName').value = '';
+    localStorage.setItem('service', JSON.stringify(serviceObj));
   }
 }
 
 // Event bubbling - make sure clicking on empty container area doesn't delete container
 function deleteLabel(e) {
-  if (!e.target.classList.contains('label-container')) e.target.remove();
+  if (!e.target.classList.contains('label-container')) {
+    e.target.remove();
+  }
 }
 
 function pickTaskLabel(e) {
@@ -206,6 +218,7 @@ function resetApp() {
     alert('Baza očišćena!');
     closeModal();
     resetFE();
+    init();
   }
 }
 
@@ -286,7 +299,7 @@ function saveAdmin() {
       color: label.style.backgroundColor,
     });
   }
-  // store to LS
+  // store admin data to LS
   let userDataObj = {};
   userDataObj = Object.fromEntries(workMap);
   userDataObj.priorityLabels = labelArr;
