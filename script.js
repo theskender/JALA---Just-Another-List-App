@@ -117,6 +117,9 @@ function showNewProject() {
   currentModalPrefix = 'new-project-modal';
   newProjectModal.classList.remove('hidden');
   overlay.classList.remove('hidden');
+  document
+    .querySelector('#new-project-modal__label-container')
+    .addEventListener('click', pickTaskLabel);
   loadNewProject();
 }
 
@@ -125,6 +128,7 @@ function showNewDay() {
   currentModalPrefix = 'new-day-modal';
   newDayModal.classList.remove('hidden');
   overlay.classList.remove('hidden');
+  loadNewDay();
 }
 
 function showEditProject() {
@@ -132,6 +136,7 @@ function showEditProject() {
   currentModalPrefix = 'edit-project-modal';
   editProjectModal.classList.remove('hidden');
   overlay.classList.remove('hidden');
+  loadEditProject();
 }
 
 function showEditDay() {
@@ -139,6 +144,7 @@ function showEditDay() {
   currentModalPrefix = 'edit-day-modal';
   editDayModal.classList.remove('hidden');
   overlay.classList.remove('hidden');
+  loadEditDay();
 }
 
 // Labels in label container need to be cleared, needs to be added to this function as they're not part of form and not affected by reset()
@@ -161,6 +167,9 @@ function closeModal() {
   document
     .querySelector('#add-lbl-btn')
     .removeEventListener('click', createLabel);
+  document
+    .querySelector('#new-project-modal__label-container')
+    .removeEventListener('click', pickTaskLabel);
 }
 
 function createLabel() {
@@ -184,6 +193,11 @@ function deleteLabel(e) {
   if (!e.target.classList.contains('label-container')) e.target.remove();
 }
 
+function pickTaskLabel(e) {
+  if (e.target.classList.contains('priority-label'))
+    e.target.classList.toggle('picked-label');
+}
+
 // Refresh function needs to be called here when implemented
 function resetApp() {
   let decision = confirm('Jeste li sigurni?');
@@ -201,19 +215,33 @@ function addTask() {
   if (taskText) {
     const element = document.createElement('LI');
     const xBtn = document.createElement('SPAN');
-    const lblCont = document.createElement('DIV');
+    const lblContainer = document.createElement('DIV');
     element.classList.add('modal__task');
     xBtn.classList.add('remove-task');
-    lblCont.classList.add('.label-container');
+    lblContainer.classList.add('label-container');
     let textNode = document.createTextNode(taskText);
     let xBtnText = document.createTextNode('x');
     xBtn.appendChild(xBtnText);
     element.appendChild(textNode);
-    element.appendChild(lblCont);
+    element.appendChild(lblContainer);
     element.appendChild(xBtn);
     element.onclick = function () {
       this.classList.toggle('checked');
     };
+    // pick lbls for new task
+    let pickLblContainer = document.querySelector(
+      '#new-project-modal__label-container'
+    );
+    let lbls = pickLblContainer.childNodes;
+    for (const lbl of lbls) {
+      if (lbl.classList.contains('picked-label')) {
+        let lblClone = lbl.cloneNode(true);
+        lblContainer.appendChild(lblClone);
+        lbl.classList.remove('picked-label');
+        lblClone.classList.remove('picked-label');
+      }
+    }
+    // Create task and reset form
     document.querySelector('.modal__tasks-container').appendChild(element);
     document.querySelector('#tasktext').value = '';
   }
@@ -291,6 +319,7 @@ function loadNewDay() {}
 
 function loadEditDay() {}
 
+// limited to header for now, will be much bigger when cards are implemented
 function loadFE() {
   const userDataObj = JSON.parse(localStorage.getItem('userData'));
   if (userDataObj) {
@@ -302,6 +331,7 @@ function loadFE() {
   }
 }
 
+// limited to header for now, will be much bigger when cards are implemented
 function resetFE() {
   document.querySelector('.header-user-pic').src = '';
   document.querySelector('.header-user-name').textContent = '';

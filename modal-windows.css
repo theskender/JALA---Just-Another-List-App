@@ -232,6 +232,10 @@ textarea {
   -o-user-select: none;
   user-select: none;
 
+  cursor: pointer;
+}
+
+#admin .priority-label {
   cursor: not-allowed;
 }
 
@@ -346,4 +350,10 @@ textarea {
 
 .modal__tasks-container .modal__task.checked .priority-label {
   font-style: normal;
+}
+
+.picked-label {
+  font-style: italic;
+  text-decoration: underline;
+  font-weight: 800;
 }

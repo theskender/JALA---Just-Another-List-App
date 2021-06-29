@@ -365,16 +365,6 @@
                 size="30"
               />
             </div>
-            <!--MUST CONNECT TO LABELS JSON AND DYNAMICALLY REFRESH, THESE ARE PLACEHOLDER OPTIONS-->
-            <!--Probably going different route instead of this type of input, commented out for now-->
-            <!-- <div class="lbl-inp-pair">
-              <label for="labelpicker">Izbor labela:</label>
-              <select id="labelpicker" name="labelpicker">
-                <option value="Manje važno">Manje važno</option>
-                <option value="Srednje važno">Srednje važno</option>
-                <option value="Važno">Važno</option>
-              </select>
-            </div> -->
             <p title="Labele za označavanje prioriteta/vrste zadataka.">
               Labele za zadatak
               <span class="italic">(klikni za odabrati)</span>
@@ -393,51 +383,7 @@
         <form autocomplete="off" id="tasks" name="tasks">
           <fieldset>
             <legend>Uneseni zadaci</legend>
-            <ul class="modal__tasks-container">
-              <!--Temporary hardcoded li's for testing, remove later-->
-              <li class="modal__task">
-                Kratki zadatak
-                <div class="label-container">
-                  <div
-                    class="priority-label"
-                    id="lbl3"
-                    style="background-color: rgb(229, 255, 0)"
-                  >
-                    Posao
-                  </div>
-                  <div
-                    class="priority-label"
-                    id="lbl7"
-                    style="background-color: rgb(255, 0, 0)"
-                  >
-                    Label5
-                  </div>
-                </div>
-                <span class="remove-task">x</span>
-              </li>
-              <li class="modal__task">
-                Dugi zadatak Dugi zadatak Dugi zadatak Dugi zadatak Dugi zadatak
-                Dugi zadatak Dugi zadatak Dugi zadatak Dugi zadatak Dugi zadatak
-                Dugi zadatak Dugi zadatak Dugi zadatak Dugi zadatak Dugi zadatak
-                Dugi zadatak Dugi zadatak Dugi zadatak Dugi zadatak Dugi zadatak
-                Dugi zadatak Dugi zadatak Dugi zadatak Dugi zadatak Dugi zadatak
-                Dugi zadatak Dugi zadatak Dugi zadatak Dugi zadatak Dugi zadatak
-                Dugi zadatak Dugi zadatak Dugi zadatak Dugi zadatak Dugi zadatak
-                Dugi zadatak Dugi zadatak Dugi zadatak Dugi zadatak Dugi zadatak
-                Dugi zadatak Dugi zadatak Dugi zadatak Dugi zadatak Dugi zadatak
-                Dugi zadatak Dugi zadatak Dugi zadatak
-                <div class="label-container">
-                  <div
-                    class="priority-label"
-                    id="lbl2"
-                    style="background-color: rgb(0, 217, 255)"
-                  >
-                    Faks
-                  </div>
-                </div>
-                <span class="remove-task">x</span>
-              </li>
-            </ul>
+            <ul class="modal__tasks-container"></ul>
           </fieldset>
           <fieldset>
             <legend>Bilješke</legend>
