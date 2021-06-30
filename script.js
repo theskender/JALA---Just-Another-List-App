@@ -287,9 +287,12 @@ function cardDeleteListeners() {
   }
 }
 
-// Placeholder function, needs to recognize task card clicked on - check previously used functions for deleting parent nodes (might be 2 levels up)
+// Needs LS part of function when LS is implemented - fetch and delete project/day with same id as task card
 function deleteTaskCard(e) {
-  e.target.parentNode.parentNode.remove();
+  e.target.parentNode.parentNode.classList.add('task-card-deletion');
+  setTimeout(function () {
+    e.target.parentNode.parentNode.remove();
+  }, 400);
 }
 
 /////////////////////////// Data handling ///////////////////////////
