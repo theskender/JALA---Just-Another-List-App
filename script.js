@@ -15,6 +15,7 @@ const editDayModal = document.querySelector('.edit-day-modal');
 const projectCancelBtn = document.querySelector('#project-cancel-btn');
 const adminCancelBtn = document.querySelector('#admin-cancel-btn');
 const adminSaveBtn = document.querySelector('#admin-save-btn');
+const projectSaveBtn = document.querySelector('#project-save-btn');
 
 // State variables
 let currentModal;
@@ -44,10 +45,10 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
-// - save changes
+// - save changes admin
 adminSaveBtn.addEventListener('click', saveAdmin);
 
-// - neProject modal
+// - newProject modal
 document
   .querySelector('.new-project')
   .addEventListener('click', showNewProject);
@@ -103,8 +104,16 @@ function init() {
     projectsIdCounter: 0,
     daysIdCounter: 0,
   };
+  let projects = {};
+  let days = {};
   if (localStorage.getItem('service') === null) {
     localStorage.setItem('service', JSON.stringify(service));
+  }
+  if (localStorage.getItem('projects') === null) {
+    localStorage.setItem('projects', JSON.stringify(projects));
+  }
+  if (localStorage.getItem('days') === null) {
+    localStorage.setItem('days', JSON.stringify(days));
   }
 }
 
@@ -128,6 +137,8 @@ function showNewProject() {
   document
     .querySelector('#new-project-modal__label-container')
     .addEventListener('click', pickTaskLabel);
+  // - save new project
+  projectSaveBtn.addEventListener('click', saveProject);
   loadNewProject();
 }
 
@@ -178,6 +189,7 @@ function closeModal() {
   document
     .querySelector('#new-project-modal__label-container')
     .removeEventListener('click', pickTaskLabel);
+  projectSaveBtn.removeEventListener('click', saveProject);
 }
 
 function createLabel() {
@@ -224,7 +236,7 @@ function resetApp() {
 
 // Create new task --- TO REVAMP IN REACT
 function addTask() {
-  let taskText = document.querySelector('#tasktext').value;
+  let taskText = document.querySelector('#taskText').value;
   if (taskText) {
     const element = document.createElement('LI');
     const xBtn = document.createElement('SPAN');
@@ -256,7 +268,7 @@ function addTask() {
     }
     // Create task and reset form
     document.querySelector('.modal__tasks-container').appendChild(element);
-    document.querySelector('#tasktext').value = '';
+    document.querySelector('#taskText').value = '';
   }
 }
 
@@ -265,9 +277,6 @@ function removeTask(e) {
   const classes = e.target.classList;
   if (classes.contains('remove-task')) e.target.parentNode.remove();
 }
-
-// Very important later, reloads cards on main screen after any save/edit/delete all function has been triggered --- potentially will be replaced with methods since cards will become react elements
-function refreshMainScreen() {}
 
 // Placeholder function, needs to recognize task card clicked on - check previously used functions for deleting parent nodes (might be 2 levels up)
 function deleteTaskCard() {
@@ -308,6 +317,44 @@ function saveAdmin() {
   loadFE();
   closeModal();
 }
+
+function saveProject() {
+  let projectName = document.querySelector('#projectName').value;
+  if (!projectName == '') {
+    let serviceObj = JSON.parse(localStorage.getItem('service'));
+    let projects = JSON.parse(localStorage.getItem('projects'));
+    let project = {};
+    project.projectName = projectName;
+    project.notes = document.querySelector('#notes').value;
+    project.tasks = [];
+    // hard part: list items to get text and priority labels
+    const tasks = Array.from(
+      document.querySelectorAll('#new-project__tasks-container .modal__task')
+    );
+    for (const [index, content] of tasks.entries()) {
+      let labelIds = [];
+      let labels = content.querySelectorAll('.label-container .priority-label');
+      for (const label of labels) {
+        labelIds.push(label.id);
+      }
+      project.tasks.push({
+        text: content.innerHTML.substr(0, content.innerHTML.indexOf('<')),
+        priorityLabels: labelIds,
+        checked: `${content.classList.contains('checked') ? true : false}`,
+      });
+    }
+
+    // Update projects object in LS
+    projects[`pro${serviceObj.projectsIdCounter}`] = project;
+    localStorage.setItem('projects', JSON.stringify(projects));
+    // Update project counter in LS
+    serviceObj.projectsIdCounter++;
+    localStorage.setItem('service', JSON.stringify(serviceObj));
+    closeModal();
+  } else alert('Ime projekta je obvezno polje!');
+}
+
+function saveDay() {}
 
 /////// Loading LS data on change || when opening forms
 function loadAdmin() {
