@@ -115,6 +115,7 @@ function init() {
   if (localStorage.getItem('days') === null) {
     localStorage.setItem('days', JSON.stringify(days));
   }
+  cardDeleteListeners();
 }
 
 function showAdmin() {
@@ -278,9 +279,17 @@ function removeTask(e) {
   if (classes.contains('remove-task')) e.target.parentNode.remove();
 }
 
+// Adds listeners to delete buttons for task cards on init and on refresh
+function cardDeleteListeners() {
+  let closeBtns = document.querySelectorAll('.task-card__close');
+  for (let i = 0; i < closeBtns.length; i++) {
+    closeBtns[i].addEventListener('click', deleteTaskCard);
+  }
+}
+
 // Placeholder function, needs to recognize task card clicked on - check previously used functions for deleting parent nodes (might be 2 levels up)
-function deleteTaskCard() {
-  console.log('Deleted!');
+function deleteTaskCard(e) {
+  e.target.parentNode.parentNode.remove();
 }
 
 /////////////////////////// Data handling ///////////////////////////
@@ -350,7 +359,9 @@ function saveProject() {
     // Update project counter in LS
     serviceObj.projectsIdCounter++;
     localStorage.setItem('service', JSON.stringify(serviceObj));
+
     closeModal();
+    cardDeleteListeners();
   } else alert('Ime projekta je obvezno polje!');
 }
 

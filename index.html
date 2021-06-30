@@ -413,7 +413,62 @@
         <div class="modal__header-title">Novi dan</div>
         <i class="fa fa-times modal__close" aria-hidden="true"></i>
       </div>
-      <div class="modal__content"></div>
+      <div class="modal__content">
+        <form autocomplete="off" id="newprojectname" name="newprojectname">
+          <fieldset>
+            <legend>Novi dan</legend>
+            <div class="lbl-inp-pair">
+              <label for="dayDate">Datum:</label>
+              <input type="date" name="dayDate" id="dayDate" size="30" />
+            </div>
+          </fieldset>
+        </form>
+        <form autocomplete="off" id="taskinputday" name="taskinputday">
+          <fieldset>
+            <legend>Unos zadatka</legend>
+            <div class="lbl-inp-pair">
+              <label for="taskText">Tekst zadatka:</label>
+              <input
+                type="text"
+                name="taskTextDay"
+                id="taskTextDay"
+                placeholder="Unesi tekst zadatka..."
+                size="30"
+              />
+            </div>
+            <p title="Labele za označavanje prioriteta/vrste zadataka.">
+              Labele za zadatak
+              <span class="italic">(klikni za odabrati)</span>
+            </p>
+            <div
+              id="new-day-modal__label-container"
+              class="label-container"
+            ></div>
+            <div class="form-btn-container">
+              <button class="form-btn" type="button" id="add-task-btn">
+                Unesi zadatak
+              </button>
+            </div>
+          </fieldset>
+        </form>
+        <form autocomplete="off" id="tasksday" name="tasksday">
+          <fieldset>
+            <legend>Uneseni zadaci</legend>
+            <ul
+              id="new-day__tasks-container"
+              class="modal__tasks-container"
+            ></ul>
+          </fieldset>
+        </form>
+        <div class="form-btn-container">
+          <button class="form-btn" type="button" id="day-save-btn">
+            Spremi
+          </button>
+          <button class="form-btn" type="reset" id="day-cancel-btn">
+            Odustani
+          </button>
+        </div>
+      </div>
     </div>
 
     <!--edit-project modal-->
