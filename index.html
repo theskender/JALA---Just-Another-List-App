@@ -45,7 +45,7 @@
       </div>
 
       <!--Progress bar fills written inline for show, remove when implementing dynamic change-->
-      <div class="task-card-container projects-container">
+      <div id="projects-container" class="task-card-container">
         <div class="task-card task-card-project">
           <div class="task-card__close-container">
             <i class="fa fa-times task-card__close" aria-hidden="true"></i>
@@ -477,7 +477,80 @@
         <div class="modal__header-title">*Generiraj ime*</div>
         <i class="fa fa-times modal__close" aria-hidden="true"></i>
       </div>
-      <div class="modal__content"></div>
+      <div class="modal__content">
+        <form autocomplete="off" id="editprojectname" name="editprojectname">
+          <fieldset>
+            <legend>Ažuriranje projekta</legend>
+            <div class="lbl-inp-pair">
+              <label for="projectNameEdit">Ime projekta:</label>
+              <input
+                type="text"
+                name="projectNameEdit"
+                id="projectNameEdit"
+                placeholder="Unesi ime projekta..."
+                size="30"
+                maxlength="50"
+              />
+            </div>
+          </fieldset>
+        </form>
+        <form
+          autocomplete="off"
+          id="taskinputprojectedit"
+          name="taskinputprojectedit"
+        >
+          <fieldset>
+            <legend>Unos zadatka</legend>
+            <div class="lbl-inp-pair">
+              <label for="taskText">Tekst zadatka:</label>
+              <input
+                type="text"
+                name="taskText"
+                id="taskText"
+                placeholder="Unesi tekst zadatka..."
+                size="30"
+              />
+            </div>
+            <p title="Labele za označavanje prioriteta/vrste zadataka.">
+              Labele za zadatak
+              <span class="italic">(klikni za odabrati)</span>
+            </p>
+            <div
+              id="edit-project-modal__label-container"
+              class="label-container"
+            ></div>
+            <div class="form-btn-container">
+              <button class="form-btn" type="button" id="add-task-btn-edit-pro">
+                Unesi zadatak
+              </button>
+            </div>
+          </fieldset>
+        </form>
+        <form autocomplete="off" id="tasks" name="tasks">
+          <fieldset>
+            <legend>Uneseni zadaci</legend>
+            <ul
+              id="new-project__tasks-container"
+              class="modal__tasks-container"
+            ></ul>
+          </fieldset>
+          <fieldset>
+            <legend>Bilješke</legend>
+            <div class="lbl-txt-pair">
+              <label for="notes">Bilješke o projektu:</label>
+              <textarea id="notes" name="notes" placeholder="..."></textarea>
+            </div>
+          </fieldset>
+        </form>
+        <div class="form-btn-container">
+          <button class="form-btn" type="button" id="project-save-btn">
+            Spremi
+          </button>
+          <button class="form-btn" type="reset" id="project-cancel-btn">
+            Odustani
+          </button>
+        </div>
+      </div>
     </div>
 
     <!--edit-day modal-->

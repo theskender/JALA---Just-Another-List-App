@@ -57,22 +57,29 @@ document
 document.querySelector('.new-day').addEventListener('click', showNewDay);
 
 // editProject modal
-taskCardsProjects = document.querySelectorAll(
-  '.task-card__progress-bar-container'
-);
-for (let i = 0; i < taskCardsProjects.length; i++) {
-  taskCardsProjects[i].addEventListener('click', showEditProject);
+function projectCardListener() {
+  taskCardsProjects = document.querySelectorAll(
+    '.task-card__progress-bar-container'
+  );
+  for (let i = 0; i < taskCardsProjects.length; i++) {
+    taskCardsProjects[i].addEventListener('click', showEditProject);
+  }
 }
+projectCardListener();
 
 // editDay modal
-taskCardsDays = document.querySelectorAll(
-  '.task-card__tasks-preview-container'
-);
-for (let i = 0; i < taskCardsDays.length; i++) {
-  taskCardsDays[i].addEventListener('click', showEditDay);
+function dayCardListener() {
+  taskCardsDays = document.querySelectorAll(
+    '.task-card__tasks-preview-container'
+  );
+  for (let i = 0; i < taskCardsDays.length; i++) {
+    taskCardsDays[i].addEventListener('click', showEditDay);
+  }
 }
+dayCardListener();
 
 // Card delete buttons from main screen
+function cardDeleteListener() {}
 let cardDeleteBtns = document.querySelectorAll('.task-card__close');
 for (let i = 0; i < cardDeleteBtns.length; i++) {
   cardDeleteBtns[i].addEventListener('click', deleteTaskCard);
@@ -83,6 +90,9 @@ document.getElementById('reset-all-btn').addEventListener('click', resetApp);
 
 // - add task
 addTaskBtn.addEventListener('click', addTask);
+document
+  .querySelector('#add-task-btn-edit-pro')
+  .addEventListener('click', addTask);
 
 // - remove task
 document
@@ -356,9 +366,10 @@ function saveProject() {
       });
     }
 
-    // Update projects object in LS
+    // Update projects object in LS, create task card on FE with same id
     projects[`pro${serviceObj.projectsIdCounter}`] = project;
     localStorage.setItem('projects', JSON.stringify(projects));
+    createTaskCard(project, serviceObj);
     // Update project counter in LS
     serviceObj.projectsIdCounter++;
     localStorage.setItem('service', JSON.stringify(serviceObj));
@@ -366,6 +377,75 @@ function saveProject() {
     closeModal();
     cardDeleteListeners();
   } else alert('Ime projekta je obvezno polje!');
+}
+
+// separate for day and project if necessary for now, then se how to make universal
+// see if it has to be nested in saveProject() - for variable contexts etc, or can be separate function triggered by saveProject
+// see if id from LS object can be passed as argument into function
+////// MAIN CANDIDATE FOR REACT REVAMP ///////
+// For now this is version for task-card-project
+function createTaskCard(project, serviceObj) {
+  // create elements
+  const taskCard = document.createElement('DIV');
+  const taskCardCloseContainer = document.createElement('DIV');
+  const taskCardClose = document.createElement('I');
+  const progressBarContainer = document.createElement('DIV');
+  const progressBar = document.createElement('DIV');
+  const progressBarFill = document.createElement('DIV');
+  const taskCardHeader = document.createElement('H3');
+  const textNode = document.createTextNode(`${project.projectName}`);
+  let progressBarWidth = 0;
+  let progressBarColor = '';
+  function calcProgressWidth() {
+    let totalTasks = project.tasks.length;
+    let checked = 0;
+    for (const task of project.tasks) {
+      if (task.checked == 'true') {
+        checked++;
+      }
+    }
+    let checkedTasks = checked;
+
+    progressBarWidth = (checkedTasks / totalTasks).toFixed(2) * 100;
+  }
+  function calcProgressColor() {
+    if (progressBarWidth < 33) progressBarColor = 'red';
+    else if (progressBarWidth >= 33 && progressBarWidth < 67)
+      progressBarColor = 'yellow';
+    else if (progressBarWidth >= 67) progressBarColor = 'green';
+  }
+  calcProgressWidth();
+  calcProgressColor();
+
+  // add css classes and attributes to elements
+  taskCard.classList.add('task-card', 'task-card-project');
+  taskCard.id = `pro${serviceObj.projectsIdCounter}`;
+  taskCardCloseContainer.classList.add('task-card__close-container');
+  taskCardClose.classList.add('fa', 'fa-times', 'task-card__close');
+  taskCardClose.setAttribute('aria-hidden', 'true');
+  taskCardHeader.classList.add('task-card__header', 'project-header');
+  progressBarContainer.classList.add('task-card__progress-bar-container');
+  progressBar.classList.add('progress-bar');
+  progressBarFill.classList.add('progress-bar-fill');
+  // PB needs to change dynamically based on % of items checked and name of object
+
+  progressBarFill.style.width = `${progressBarWidth}%`;
+  progressBarFill.style.backgroundColor = `${progressBarColor}`;
+
+  // Appending children and rendering to DOM
+  taskCard.appendChild(taskCardCloseContainer);
+  taskCardCloseContainer.appendChild(taskCardClose);
+  taskCard.appendChild(taskCardHeader);
+  taskCardHeader.appendChild(textNode);
+  taskCard.appendChild(progressBarContainer);
+  progressBarContainer.appendChild(progressBar);
+  progressBar.appendChild(progressBarFill);
+  progressBarContainer.appendChild(progressBar);
+
+  document.querySelector('#projects-container').appendChild(taskCard);
+
+  cardDeleteListeners();
+  projectCardListener();
 }
 
 function saveDay() {}
