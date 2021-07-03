@@ -72,10 +72,10 @@
   }
 
   .task-card {
-    font-size: 5vh; /*task-card__close*/
+    font-size: 5vh; /*task-card__delete*/
   }
 
-  .task-card__close-container {
+  .task-card__delete-container {
     height: 6.5vh;
   }
 

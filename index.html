@@ -47,8 +47,8 @@
       <!--Progress bar fills written inline for show, remove when implementing dynamic change-->
       <div id="projects-container" class="task-card-container">
         <div class="task-card task-card-project">
-          <div class="task-card__close-container">
-            <i class="fa fa-times task-card__close" aria-hidden="true"></i>
+          <div class="task-card__delete-container">
+            <i class="fa fa-times task-card__delete" aria-hidden="true"></i>
           </div>
           <h3 class="task-card__header project-header">Diplomski rad</h3>
           <div class="task-card__progress-bar-container">
@@ -61,8 +61,8 @@
           </div>
         </div>
         <div class="task-card task-card-project">
-          <div class="task-card__close-container">
-            <i class="fa fa-times task-card__close" aria-hidden="true"></i>
+          <div class="task-card__delete-container">
+            <i class="fa fa-times task-card__delete" aria-hidden="true"></i>
           </div>
           <h3 class="task-card__header project-header">
             Učenje CSS i JavaScript
@@ -77,8 +77,8 @@
           </div>
         </div>
         <div class="task-card task-card-project">
-          <div class="task-card__close-container">
-            <i class="fa fa-times task-card__close" aria-hidden="true"></i>
+          <div class="task-card__delete-container">
+            <i class="fa fa-times task-card__delete" aria-hidden="true"></i>
           </div>
           <h3 class="task-card__header project-header">Učenje PHP</h3>
           <div class="task-card__progress-bar-container">
@@ -104,8 +104,8 @@
       </div>
       <div class="task-card-container days-container">
         <div class="task-card task-card-day">
-          <div class="task-card__close-container">
-            <i class="fa fa-times task-card__close" aria-hidden="true"></i>
+          <div class="task-card__delete-container">
+            <i class="fa fa-times task-card__delete" aria-hidden="true"></i>
           </div>
           <h3 class="task-card__header day-header">01-06-2021</h3>
           <div class="task-card__tasks-preview-container">
@@ -124,8 +124,8 @@
           </div>
         </div>
         <div class="task-card task-card-day">
-          <div class="task-card__close-container">
-            <i class="fa fa-times task-card__close" aria-hidden="true"></i>
+          <div class="task-card__delete-container">
+            <i class="fa fa-times task-card__delete" aria-hidden="true"></i>
           </div>
           <h3 class="task-card__header day-header">02-06-2021</h3>
           <div class="task-card__tasks-preview-container">
@@ -141,8 +141,8 @@
           </div>
         </div>
         <div class="task-card task-card-day">
-          <div class="task-card__close-container">
-            <i class="fa fa-times task-card__close" aria-hidden="true"></i>
+          <div class="task-card__delete-container">
+            <i class="fa fa-times task-card__delete" aria-hidden="true"></i>
           </div>
           <h3 class="task-card__header day-header">03-06-2021</h3>
           <div class="task-card__tasks-preview-container">
@@ -156,8 +156,8 @@
           </div>
         </div>
         <div class="task-card task-card-day">
-          <div class="task-card__close-container">
-            <i class="fa fa-times task-card__close" aria-hidden="true"></i>
+          <div class="task-card__delete-container">
+            <i class="fa fa-times task-card__delete" aria-hidden="true"></i>
           </div>
           <h3 class="task-card__header day-header">04-06-2021</h3>
           <div class="task-card__tasks-preview-container">
@@ -168,8 +168,8 @@
           </div>
         </div>
         <div class="task-card task-card-day">
-          <div class="task-card__close-container">
-            <i class="fa fa-times task-card__close" aria-hidden="true"></i>
+          <div class="task-card__delete-container">
+            <i class="fa fa-times task-card__delete" aria-hidden="true"></i>
           </div>
           <h3 class="task-card__header day-header">05-06-2021</h3>
           <div class="task-card__tasks-preview-container">
@@ -179,8 +179,8 @@
           </div>
         </div>
         <div class="task-card task-card-day">
-          <div class="task-card__close-container">
-            <i class="fa fa-times task-card__close" aria-hidden="true"></i>
+          <div class="task-card__delete-container">
+            <i class="fa fa-times task-card__delete" aria-hidden="true"></i>
           </div>
           <h3 class="task-card__header day-header">06-06-2021</h3>
           <div class="task-card__tasks-preview-container">
@@ -384,7 +384,7 @@
           <fieldset>
             <legend>Uneseni zadaci</legend>
             <ul
-              id="new-project__tasks-container"
+              id="new-project-modal__tasks-container"
               class="modal__tasks-container"
             ></ul>
           </fieldset>
@@ -530,7 +530,7 @@
           <fieldset>
             <legend>Uneseni zadaci</legend>
             <ul
-              id="new-project__tasks-container"
+              id="edit-project-modal__tasks-container"
               class="modal__tasks-container"
             ></ul>
           </fieldset>
@@ -563,8 +563,9 @@
     </div>
   </body>
 
-  <script src="script.js"></script>
   <script src="data-handling.js"></script>
+  <script src="fe-functions.js"></script>
+  <script src="init.js"></script>
   <!--Font awesome 4-->
   <script src="https://use.fontawesome.com/c190fbd9a0.js"></script>
 </html>
