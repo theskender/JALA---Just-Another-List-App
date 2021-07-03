@@ -45,6 +45,10 @@ function showAdmin() {
 }
 
 function showNewProject() {
+  let legend = document.querySelector('#project-legend');
+  legend.textContent = 'Novi projekt';
+  let heading = document.querySelector('#modal__header-title-project');
+  heading.textContent = 'Novi projekt';
   currentModal = newProjectModal;
   currentModalPrefix = 'new-project-modal';
   newProjectModal.classList.remove('hidden');
@@ -52,9 +56,35 @@ function showNewProject() {
   document
     .querySelector('#new-project-modal__label-container')
     .addEventListener('click', pickTaskLabel);
-  // - save new project
+  // - save new project btn
   projectSaveBtn.addEventListener('click', saveProject);
-  loadNewProject();
+  loadLabels();
+}
+
+function showEditProject() {
+  // Shares a modal with showNewProject, overrides elements that need to be loaded from LS/DB
+  showNewProject();
+  let dataId = this.parentNode.id;
+  let projectData = loadProjectData(dataId);
+  console.log(projectData);
+
+  // different legend and heading than newProject
+  let legend = document.querySelector('#project-legend');
+  legend.textContent = `${projectData.projectName}`;
+  let heading = document.querySelector('#modal__header-title-project');
+  heading.textContent = 'Ažuriranje projekta';
+  // input fields fill from LS/DB
+  document.querySelector('#projectName').value = projectData.projectName;
+  document.querySelector('#notes').value = projectData.notes;
+  // add and fill tasks with proper labels and colors from LS
+  for (const task of projectData.tasks) {
+    loadTasks(task.text, task.priorityLabels, task.checked);
+  }
+
+  //   currentModal = editProjectModal;
+  //   currentModalPrefix = 'edit-project-modal';
+  //   editProjectModal.classList.remove('hidden');
+  //   overlay.classList.remove('hidden');
 }
 
 function showNewDay() {
@@ -62,15 +92,6 @@ function showNewDay() {
   currentModalPrefix = 'new-day-modal';
   newDayModal.classList.remove('hidden');
   overlay.classList.remove('hidden');
-  loadNewDay();
-}
-
-function showEditProject() {
-  currentModal = editProjectModal;
-  currentModalPrefix = 'edit-project-modal';
-  editProjectModal.classList.remove('hidden');
-  overlay.classList.remove('hidden');
-  loadEditProject();
 }
 
 function showEditDay() {
@@ -78,7 +99,6 @@ function showEditDay() {
   currentModalPrefix = 'edit-day-modal';
   editDayModal.classList.remove('hidden');
   overlay.classList.remove('hidden');
-  loadEditDay();
 }
 
 // Labels in label container need to be cleared, needs to be added to this function as they're not part of form and not affected by reset()
@@ -190,6 +210,45 @@ function addTask() {
     document.querySelector('.modal__tasks-container').appendChild(element);
     document.querySelector('#taskText').value = '';
   }
+}
+
+// Meant to be iterated when called
+function loadTasks(text, priorityLabels, checked) {
+  let userDataObj = JSON.parse(localStorage.getItem('userData'));
+  let lblReference = userDataObj.priorityLabels;
+  let labels = priorityLabels;
+
+  const element = document.createElement('LI');
+  const xBtn = document.createElement('SPAN');
+  const lblContainer = document.createElement('DIV');
+  element.classList.add('modal__task');
+  xBtn.classList.add('remove-task');
+  lblContainer.classList.add('label-container');
+  let textNode = document.createTextNode(text);
+  let xBtnText = document.createTextNode('x');
+  xBtn.appendChild(xBtnText);
+  element.appendChild(textNode);
+  element.appendChild(lblContainer);
+  element.appendChild(xBtn);
+  element.onclick = function () {
+    this.classList.toggle('checked');
+  };
+  if (checked == 'true') element.classList.add('checked');
+  // Add labels to task
+  for (const label of labels) {
+    const lbl = document.createElement('DIV');
+    lbl.classList.add('priority-label');
+    for (const ref of lblReference) {
+      if (ref.id == label) {
+        lbl.id = ref.id;
+        lbl.innerHTML = ref.text;
+        lbl.style.backgroundColor = ref.color;
+        lblContainer.appendChild(lbl);
+      }
+    }
+  }
+
+  document.querySelector('.modal__tasks-container').appendChild(element);
 }
 
 // Remove this task

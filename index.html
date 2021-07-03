@@ -46,7 +46,7 @@
 
       <!--Progress bar fills written inline for show, remove when implementing dynamic change-->
       <div id="projects-container" class="task-card-container">
-        <div class="task-card task-card-project">
+        <div id="pro1001" class="task-card task-card-project">
           <div class="task-card__delete-container">
             <i class="fa fa-times task-card__delete" aria-hidden="true"></i>
           </div>
@@ -60,7 +60,7 @@
             </div>
           </div>
         </div>
-        <div class="task-card task-card-project">
+        <div id="pro1002" class="task-card task-card-project">
           <div class="task-card__delete-container">
             <i class="fa fa-times task-card__delete" aria-hidden="true"></i>
           </div>
@@ -76,7 +76,7 @@
             </div>
           </div>
         </div>
-        <div class="task-card task-card-project">
+        <div id="pro1000" class="task-card task-card-project">
           <div class="task-card__delete-container">
             <i class="fa fa-times task-card__delete" aria-hidden="true"></i>
           </div>
@@ -332,13 +332,13 @@
     <!--new-project modal-->
     <div class="modal new-project-modal hidden">
       <div class="modal__header">
-        <div class="modal__header-title">Novi projekt</div>
+        <div class="modal__header-title" id="modal__header-title-project"></div>
         <i class="fa fa-times modal__close" aria-hidden="true"></i>
       </div>
       <div class="modal__content">
         <form autocomplete="off" id="newprojectname" name="newprojectname">
           <fieldset>
-            <legend>Novi projekt</legend>
+            <legend id="project-legend"></legend>
             <div class="lbl-inp-pair">
               <label for="projectName">Ime projekta:</label>
               <input
@@ -414,7 +414,7 @@
         <i class="fa fa-times modal__close" aria-hidden="true"></i>
       </div>
       <div class="modal__content">
-        <form autocomplete="off" id="newprojectname" name="newprojectname">
+        <form autocomplete="off" id="newdaydate" name="newdaydate">
           <fieldset>
             <legend>Novi dan</legend>
             <div class="lbl-inp-pair">

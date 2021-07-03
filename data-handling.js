@@ -35,6 +35,7 @@ function saveAdmin() {
   closeModal();
 }
 
+// Probably add an else if to trigger a similar but different function to save when editing projects
 function saveProject() {
   let projectName = document.querySelector('#projectName').value;
   if (!projectName == '') {
@@ -158,16 +159,6 @@ function loadAdmin() {
   }
 }
 
-function loadNewProject() {
-  loadLabels();
-}
-
-function loadEditProject() {}
-
-function loadNewDay() {}
-
-function loadEditDay() {}
-
 // limited to header for now, will be much bigger when cards are implemented - has to populate all cards from LS
 function loadFE() {
   const userDataObj = JSON.parse(localStorage.getItem('userData'));
@@ -204,4 +195,11 @@ function loadLabels() {
     element.appendChild(textNode);
     labelContainer.appendChild(element);
   }
+}
+
+function loadProjectData(id) {
+  let loadedProject = {};
+  loadedProjects = JSON.parse(localStorage.getItem('projects'));
+  loadedProject = loadedProjects[id];
+  return loadedProject;
 }
