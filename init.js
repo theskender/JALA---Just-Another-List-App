@@ -1,8 +1,6 @@
 'use strict';
 // Save re-usable elements to variables
 
-// let taskCardsProjects;
-// let taskCardsDays;
 const addTaskBtn = document.querySelector('#add-task-btn');
 const overlay = document.querySelector('.overlay');
 const loadingSpinner = document.querySelector('.loading-spinner');
@@ -19,6 +17,7 @@ const projectSaveBtn = document.querySelector('#project-save-btn');
 // State variables
 let currentModal;
 let currentModalPrefix = '';
+let activeTaskCardId = '';
 
 // Loading animation runs, comment out during development (takes 2s on reload)
 init();
@@ -33,9 +32,7 @@ document.getElementById('reset-all-btn').addEventListener('click', resetApp);
 // NEW PROJECT MODAL
 // - add task
 addTaskBtn.addEventListener('click', addTask);
-document
-  .querySelector('#add-task-btn-edit-pro')
-  .addEventListener('click', addTask);
+
 // - remove task
 document
   .querySelector('.modal__tasks-container')

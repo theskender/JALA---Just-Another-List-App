@@ -39,8 +39,11 @@ function saveAdmin() {
 function saveProject() {
   let projectName = document.querySelector('#projectName').value;
   if (!projectName == '') {
+    // Info from LS query, needed to update ID counter for projects
     let serviceObj = JSON.parse(localStorage.getItem('service'));
+    // Info from LS query, whole projects 'database'
     let projects = JSON.parse(localStorage.getItem('projects'));
+    // Object for use within function, contains all data from modal
     let project = {};
     project.projectName = projectName;
     project.notes = document.querySelector('#notes').value;
@@ -64,13 +67,54 @@ function saveProject() {
       });
     }
 
-    // Update projects object in LS, create task card on FE with same id
-    projects[`pro${serviceObj.projectsIdCounter}`] = project;
-    localStorage.setItem('projects', JSON.stringify(projects));
-    createTaskCard(project, serviceObj);
-    // Update project counter in LS
-    serviceObj.projectsIdCounter++;
-    localStorage.setItem('service', JSON.stringify(serviceObj));
+    //// Update projects object in LS, create task card on FE with same id
+    // Case: saving new project
+    if (activeTaskCardId == '') {
+      projects[`pro${serviceObj.projectsIdCounter}`] = project;
+      localStorage.setItem('projects', JSON.stringify(projects));
+      createTaskCard(project, serviceObj);
+      // Update project counter in LS
+      serviceObj.projectsIdCounter++;
+      localStorage.setItem('service', JSON.stringify(serviceObj));
+    }
+    // Case: updating existing project
+    else if (activeTaskCardId !== '') {
+      projects[`${activeTaskCardId}`] = project;
+      localStorage.setItem('projects', JSON.stringify(projects));
+      const taskCardHeading = document.querySelector(
+        `#${activeTaskCardId} .task-card__header`
+      );
+      const taskCardFill = document.querySelector(
+        `#${activeTaskCardId} .progress-bar-fill`
+      );
+      taskCardHeading.textContent = project.projectName;
+
+      let progressBarWidth = 0;
+      let progressBarColor = '';
+      function calcProgressWidth() {
+        let totalTasks = project.tasks.length;
+        let checked = 0;
+        for (const task of project.tasks) {
+          if (task.checked == 'true') {
+            checked++;
+          }
+        }
+        let checkedTasks = checked;
+
+        progressBarWidth = (checkedTasks / totalTasks).toFixed(2) * 100;
+      }
+      function calcProgressColor() {
+        if (progressBarWidth < 33) progressBarColor = 'red';
+        else if (progressBarWidth >= 33 && progressBarWidth < 67)
+          progressBarColor = 'yellow';
+        else if (progressBarWidth >= 67) progressBarColor = 'green';
+      }
+      calcProgressWidth();
+      calcProgressColor();
+
+      taskCardFill.style.width = `${progressBarWidth}%`;
+      taskCardFill.style.backgroundColor = `${progressBarColor}`;
+    }
 
     closeModal();
     cardDeleteListeners();

@@ -66,6 +66,8 @@ function showEditProject() {
   showNewProject();
   let dataId = this.parentNode.id;
   let projectData = loadProjectData(dataId);
+  activeTaskCardId = dataId;
+  console.log(activeTaskCardId);
   console.log(projectData);
 
   // different legend and heading than newProject
@@ -80,11 +82,6 @@ function showEditProject() {
   for (const task of projectData.tasks) {
     loadTasks(task.text, task.priorityLabels, task.checked);
   }
-
-  //   currentModal = editProjectModal;
-  //   currentModalPrefix = 'edit-project-modal';
-  //   editProjectModal.classList.remove('hidden');
-  //   overlay.classList.remove('hidden');
 }
 
 function showNewDay() {
@@ -119,6 +116,7 @@ function closeModal() {
   taskContainer.innerHTML = '';
   currentModal = undefined;
   currentModalPrefix = '';
+  activeTaskCardId = '';
   // remove unnecessary event listeners for closed modals
   document
     .querySelector('#admin-modal__label-container')
