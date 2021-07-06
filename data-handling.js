@@ -195,7 +195,9 @@ function createTaskCard(project, serviceObj = {}, lblOverride) {
   document.querySelector('#projects-container').appendChild(taskCard);
 }
 
-function saveDay() {}
+function saveDay() {
+  console.log('Day has been saved!');
+}
 
 // Large loop function which renders all task cards from LS. Use only on init!!
 // Works only on projects for now, apply days after implementing them!!

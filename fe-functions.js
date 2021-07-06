@@ -84,17 +84,23 @@ function showEditProject() {
 }
 
 function showNewDay() {
+  let legend = document.querySelector('#day-legend');
+  legend.textContent = 'Novi dan';
+  let heading = document.querySelector('#modal__header-title-day');
+  heading.textContent = 'Novi dan';
+  
   currentModal = newDayModal;
   currentModalPrefix = 'new-day-modal';
   newDayModal.classList.remove('hidden');
   overlay.classList.remove('hidden');
+
+  loadLabels();
+
+  daySaveBtn.addEventListener('click', saveDay);
 }
 
 function showEditDay() {
-  currentModal = editDayModal;
-  currentModalPrefix = 'edit-day-modal';
-  editDayModal.classList.remove('hidden');
-  overlay.classList.remove('hidden');
+  showNewDay();
 }
 
 // Labels in label container need to be cleared, needs to be added to this function as they're not part of form and not affected by reset()
@@ -127,6 +133,7 @@ function closeModal() {
     .querySelector('#new-project-modal__label-container')
     .removeEventListener('click', pickTaskLabel);
   projectSaveBtn.removeEventListener('click', saveProject);
+  daySaveBtn.removeEventListener('click', saveDay);
 }
 
 function createLabel() {
@@ -275,6 +282,7 @@ function addMainListeners() {
 
   adminCancelBtn.addEventListener('click', closeModal);
   projectCancelBtn.addEventListener('click', closeModal);
+  dayCancelBtn.addEventListener('click', closeModal);
 
   document.addEventListener('keydown', function (e) {
     e.preventDefault;

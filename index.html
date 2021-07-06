@@ -367,13 +367,13 @@
     <!--new-day modal-->
     <div class="modal new-day-modal hidden">
       <div class="modal__header">
-        <div class="modal__header-title">Novi dan</div>
+        <div id="modal__header-title-day" class="modal__header-title"></div>
         <i class="fa fa-times modal__close" aria-hidden="true"></i>
       </div>
       <div class="modal__content">
         <form autocomplete="off" id="newdaydate" name="newdaydate">
           <fieldset>
-            <legend>Novi dan</legend>
+            <legend id="day-legend"></legend>
             <div class="lbl-inp-pair">
               <label for="dayDate">Datum:</label>
               <input type="date" name="dayDate" id="dayDate" size="30" />
@@ -412,7 +412,7 @@
           <fieldset>
             <legend>Uneseni zadaci</legend>
             <ul
-              id="new-day__tasks-container"
+              id="new-day-modal__tasks-container"
               class="modal__tasks-container"
             ></ul>
           </fieldset>
@@ -426,15 +426,6 @@
           </button>
         </div>
       </div>
-    </div>
-
-    <!--edit-day modal-->
-    <div class="modal edit-day-modal hidden">
-      <div class="modal__header">
-        <div class="modal__header-title">*Generiraj datum*</div>
-        <i class="fa fa-times modal__close" aria-hidden="true"></i>
-      </div>
-      <div class="modal__content"></div>
     </div>
   </body>
 
