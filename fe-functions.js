@@ -38,6 +38,10 @@ function showAdmin() {
   currentModalPrefix = 'admin-modal';
   adminModal.classList.remove('hidden');
   overlay.classList.remove('hidden');
+
+  const scrollArea = document.querySelectorAll('.modal__content');
+  for (const area of scrollArea) area.scrollTo(0, 0);
+
   loadAdmin();
   document
     .querySelector('#admin-modal__label-container')
@@ -52,8 +56,13 @@ function showNewProject() {
   heading.textContent = 'Novi projekt';
   currentModal = newProjectModal;
   currentModalPrefix = 'new-project-modal';
+
   newProjectModal.classList.remove('hidden');
   overlay.classList.remove('hidden');
+
+  const scrollArea = document.querySelector('#modal__content-project');
+  scrollArea.scrollTo(0, 0);
+
   document
     .querySelector('#new-project-modal__label-container')
     .addEventListener('click', pickTaskLabel);
@@ -88,11 +97,14 @@ function showNewDay() {
   legend.textContent = 'Novi dan';
   let heading = document.querySelector('#modal__header-title-day');
   heading.textContent = 'Novi dan';
-  
+
   currentModal = newDayModal;
   currentModalPrefix = 'new-day-modal';
   newDayModal.classList.remove('hidden');
   overlay.classList.remove('hidden');
+
+  const scrollArea = document.querySelector('#modal__content-day');
+  scrollArea.scrollTo(0, 0);
 
   loadLabels();
 
