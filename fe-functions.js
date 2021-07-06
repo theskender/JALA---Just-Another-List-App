@@ -27,6 +27,7 @@ function init() {
     localStorage.setItem('days', JSON.stringify(days));
   }
 
+  renderTaskCards();
   cardDeleteListeners();
   addMainListeners();
   addModalCloseListeners();
@@ -67,8 +68,6 @@ function showEditProject() {
   let dataId = this.parentNode.id;
   let projectData = loadProjectData(dataId);
   activeTaskCardId = dataId;
-  console.log(activeTaskCardId);
-  console.log(projectData);
 
   // different legend and heading than newProject
   let legend = document.querySelector('#project-legend');
@@ -113,7 +112,7 @@ function closeModal() {
   const tasksContainerSelector = `#${currentModalPrefix}__tasks-container`;
   const taskContainer = document.querySelector(tasksContainerSelector);
   labelContainer.innerHTML = '';
-  taskContainer.innerHTML = '';
+  if (currentModalPrefix !== 'admin-modal') taskContainer.innerHTML = '';
   currentModal = undefined;
   currentModalPrefix = '';
   activeTaskCardId = '';
@@ -168,6 +167,7 @@ function resetApp() {
     alert('Baza očišćena!');
     closeModal();
     resetFE();
+    loadFE();
     init();
   }
 }
@@ -310,10 +310,21 @@ function addMainListeners() {
 
 // Needs LS part of function when LS is implemented - fetch and delete project/day with same id as task card
 function deleteTaskCard(e) {
+  let cardId = e.target.parentNode.parentNode.id;
+  // Probably to be merged with delete LSDay function, for now just like this.
+  deleteLSProject(cardId);
+
   e.target.parentNode.parentNode.classList.add('task-card-deletion');
   setTimeout(function () {
     e.target.parentNode.parentNode.remove();
   }, 400);
+  alert(`Projekt s ID-em: ${cardId.toUpperCase()} uspješno je izbrisan!`);
+}
+
+function deleteLSProject(cardId) {
+  let projects = JSON.parse(localStorage.getItem('projects'));
+  delete projects[cardId];
+  localStorage.setItem('projects', JSON.stringify(projects));
 }
 
 function addModalCloseListeners() {

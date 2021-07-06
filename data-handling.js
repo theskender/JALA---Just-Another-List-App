@@ -70,8 +70,10 @@ function saveProject() {
     //// Update projects object in LS, create task card on FE with same id
     // Case: saving new project
     if (activeTaskCardId == '') {
+      // store project to LS
       projects[`pro${serviceObj.projectsIdCounter}`] = project;
       localStorage.setItem('projects', JSON.stringify(projects));
+      // Create new Task Card in FE
       createTaskCard(project, serviceObj);
       // Update project counter in LS
       serviceObj.projectsIdCounter++;
@@ -79,8 +81,10 @@ function saveProject() {
     }
     // Case: updating existing project
     else if (activeTaskCardId !== '') {
+      // update project in LS
       projects[`${activeTaskCardId}`] = project;
       localStorage.setItem('projects', JSON.stringify(projects));
+      // update task card on FE
       const taskCardHeading = document.querySelector(
         `#${activeTaskCardId} .task-card__header`
       );
@@ -127,7 +131,7 @@ function saveProject() {
 // see if id from LS object can be passed as argument into function
 ////// MAIN CANDIDATE FOR REACT REVAMP ///////
 // For now this is version for task-card-project
-function createTaskCard(project, serviceObj) {
+function createTaskCard(project, serviceObj = {}, lblOverride) {
   // create elements
   const taskCard = document.createElement('DIV');
   const taskCardCloseContainer = document.createElement('DIV');
@@ -162,7 +166,10 @@ function createTaskCard(project, serviceObj) {
 
   // add css classes and attributes to elements
   taskCard.classList.add('task-card', 'task-card-project');
-  taskCard.id = `pro${serviceObj.projectsIdCounter}`;
+  taskCard.id =
+    Object.keys(serviceObj).length !== 0
+      ? `pro${serviceObj.projectsIdCounter}`
+      : `${lblOverride}`;
   taskCardCloseContainer.classList.add('task-card__delete-container');
   taskCardClose.classList.add('fa', 'fa-times', 'task-card__delete');
   taskCardClose.setAttribute('aria-hidden', 'true');
@@ -189,6 +196,21 @@ function createTaskCard(project, serviceObj) {
 }
 
 function saveDay() {}
+
+// Large loop function which renders all task cards from LS. Use only on init!!
+// Works only on projects for now, apply days after implementing them!!
+function renderTaskCards() {
+  const projectCardsContainer = document.querySelector('#projects-container');
+  projectCardsContainer.innerHTML = '';
+
+  const projectCardsData = JSON.parse(localStorage.getItem('projects'));
+
+  // Go through each object key and createFE elements accordinlgy
+  const entries = Object.entries(projectCardsData);
+  for (const [key, value] of entries) {
+    createTaskCard(value, undefined, key);
+  }
+}
 
 /////// Loading LS data on change || when opening forms
 function loadAdmin() {
