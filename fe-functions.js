@@ -107,6 +107,9 @@ function showNewDay() {
   scrollArea.scrollTo(0, 0);
 
   loadLabels();
+  document
+    .querySelector('#new-day-modal__label-container')
+    .addEventListener('click', pickTaskLabel);
 
   daySaveBtn.addEventListener('click', saveDay);
 }
@@ -143,6 +146,9 @@ function closeModal() {
     .removeEventListener('click', createLabel);
   document
     .querySelector('#new-project-modal__label-container')
+    .removeEventListener('click', pickTaskLabel);
+  document
+    .querySelector('#new-day-modal__label-container')
     .removeEventListener('click', pickTaskLabel);
   projectSaveBtn.removeEventListener('click', saveProject);
   daySaveBtn.removeEventListener('click', saveDay);
@@ -337,8 +343,8 @@ function deleteTaskCard(e) {
   e.target.parentNode.parentNode.classList.add('task-card-deletion');
   setTimeout(function () {
     e.target.parentNode.parentNode.remove();
-  }, 400);
-  alert(`Projekt s ID-em: ${cardId.toUpperCase()} uspješno je izbrisan!`);
+    alert(`Projekt s ID-em: ${cardId.toUpperCase()} uspješno je izbrisan!`);
+  }, 500);
 }
 
 function deleteLSProject(cardId) {
