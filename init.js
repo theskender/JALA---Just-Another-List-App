@@ -24,9 +24,3 @@ let activeTaskCardId = '';
 // Loading animation runs, comment out during development (takes 2s on reload)
 init();
 loadFE();
-
-// ADMIN MODAL
-// - save changes admin
-adminSaveBtn.addEventListener('click', saveAdmin);
-// - reset app button
-document.getElementById('reset-all-btn').addEventListener('click', resetApp);

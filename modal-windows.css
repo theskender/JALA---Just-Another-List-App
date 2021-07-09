@@ -161,6 +161,7 @@ textarea {
 input[type='date'] {
   font-size: 1.5vh;
   font-family: 'Press Start 2P', cursive;
+  padding-top: 0.25vh;
 }
 
 .lbl-inp-pair {

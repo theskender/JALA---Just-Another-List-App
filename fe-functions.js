@@ -47,6 +47,11 @@ function showAdmin() {
     .querySelector('#admin-modal__label-container')
     .addEventListener('click', deleteLabel);
   document.querySelector('#add-lbl-btn').addEventListener('click', createLabel);
+
+  // - save changes admin
+  adminSaveBtn.addEventListener('click', saveAdmin);
+  // - reset app button
+  document.getElementById('reset-all-btn').addEventListener('click', resetApp);
 }
 
 function showNewProject() {
@@ -201,6 +206,12 @@ function closeModal() {
     .querySelector('#new-day-modal__tasks-container')
     .removeEventListener('click', removeTask);
   daySaveBtn.removeEventListener('click', saveDay);
+  // - save changes admin
+  adminSaveBtn.removeEventListener('click', saveAdmin);
+  // - reset app button
+  document
+    .getElementById('reset-all-btn')
+    .removeEventListener('click', resetApp);
 }
 
 function createLabel() {
