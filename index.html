@@ -313,11 +313,11 @@
           <fieldset>
             <legend>Unos zadatka</legend>
             <div class="lbl-inp-pair">
-              <label for="taskText">Tekst zadatka:</label>
+              <label for="new-project-modal__task-text">Tekst zadatka:</label>
               <input
                 type="text"
-                name="taskText"
-                id="taskText"
+                name="new-project-modal__task-text"
+                id="new-project-modal__task-text"
                 placeholder="Unesi tekst zadatka..."
                 size="30"
               />
@@ -331,7 +331,11 @@
               class="label-container"
             ></div>
             <div class="form-btn-container">
-              <button class="form-btn" type="button" id="add-task-btn">
+              <button
+                class="form-btn"
+                type="button"
+                id="new-project-modal__add-task-btn"
+              >
                 Unesi zadatak
               </button>
             </div>
@@ -376,7 +380,14 @@
             <legend id="day-legend"></legend>
             <div class="lbl-inp-pair">
               <label for="dayDate">Datum:</label>
-              <input type="date" name="dayDate" id="dayDate" size="30" />
+              <input
+                type="date"
+                name="dayDate"
+                id="dayDate"
+                size="30"
+                min="1980-01-01"
+                step="1"
+              />
             </div>
           </fieldset>
         </form>
@@ -384,11 +395,11 @@
           <fieldset>
             <legend>Unos zadatka</legend>
             <div class="lbl-inp-pair">
-              <label for="taskText">Tekst zadatka:</label>
+              <label for="new-day-modal__task-text">Tekst zadatka:</label>
               <input
                 type="text"
-                name="taskTextDay"
-                id="taskTextDay"
+                name="new-day-modal__task-text"
+                id="new-day-modal__task-text"
                 placeholder="Unesi tekst zadatka..."
                 size="30"
               />
@@ -402,7 +413,11 @@
               class="label-container"
             ></div>
             <div class="form-btn-container">
-              <button class="form-btn" type="button" id="add-task-btn">
+              <button
+                class="form-btn"
+                type="button"
+                id="new-day-modal__add-task-btn"
+              >
                 Unesi zadatak
               </button>
             </div>

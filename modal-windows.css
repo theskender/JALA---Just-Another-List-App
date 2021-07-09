@@ -158,6 +158,11 @@ textarea {
   margin-top: 2vh;
 }
 
+input[type='date'] {
+  font-size: 1.5vh;
+  font-family: 'Press Start 2P', cursive;
+}
+
 .lbl-inp-pair {
   display: block;
   height: 4vh;

@@ -1,7 +1,7 @@
 'use strict';
 // Save re-usable elements to variables
 
-const addTaskBtn = document.querySelector('#add-task-btn');
+// const addTaskBtn = document.querySelector('#add-task-btn');
 const overlay = document.querySelector('.overlay');
 const loadingSpinner = document.querySelector('.loading-spinner');
 const adminModal = document.querySelector('.admin-modal');
@@ -30,12 +30,3 @@ loadFE();
 adminSaveBtn.addEventListener('click', saveAdmin);
 // - reset app button
 document.getElementById('reset-all-btn').addEventListener('click', resetApp);
-
-// NEW PROJECT MODAL
-// - add task
-addTaskBtn.addEventListener('click', addTask);
-
-// - remove task
-document
-  .querySelector('.modal__tasks-container')
-  .addEventListener('click', removeTask);

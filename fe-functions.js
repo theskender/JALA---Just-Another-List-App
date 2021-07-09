@@ -66,6 +66,14 @@ function showNewProject() {
   document
     .querySelector('#new-project-modal__label-container')
     .addEventListener('click', pickTaskLabel);
+
+  // - add task btn
+  const addTaskBtn = document.querySelector('#new-project-modal__add-task-btn');
+  addTaskBtn.addEventListener('click', addTask);
+  // - remove task buttons
+  document
+    .querySelector('#new-project-modal__tasks-container')
+    .addEventListener('click', removeTask);
   // - save new project btn
   projectSaveBtn.addEventListener('click', saveProject);
   loadLabels();
@@ -111,7 +119,36 @@ function showNewDay() {
     .querySelector('#new-day-modal__label-container')
     .addEventListener('click', pickTaskLabel);
 
+  // - add task btn
+  const addTaskBtn = document.querySelector('#new-day-modal__add-task-btn');
+  addTaskBtn.addEventListener('click', addTask);
+  // - remove task btn
+  document
+    .querySelector('#new-day-modal__tasks-container')
+    .addEventListener('click', removeTask);
+  // - default fill day value with current date
+  let dateInput = document.querySelector('#dayDate');
+  dateInput.value = getDate();
+  // - handler for save functionality
   daySaveBtn.addEventListener('click', saveDay);
+}
+
+function getDate() {
+  let today = new Date();
+  let dd = today.getDate();
+  let mm = today.getMonth() + 1; //January is 0!
+  let yyyy = today.getFullYear();
+
+  if (dd < 10) {
+    dd = '0' + dd;
+  }
+
+  if (mm < 10) {
+    mm = '0' + mm;
+  }
+
+  today = yyyy + '-' + mm + '-' + dd;
+  return today;
 }
 
 function showEditDay() {
@@ -150,7 +187,19 @@ function closeModal() {
   document
     .querySelector('#new-day-modal__label-container')
     .removeEventListener('click', pickTaskLabel);
+  document
+    .querySelector('#new-project-modal__add-task-btn')
+    .removeEventListener('click', addTask);
   projectSaveBtn.removeEventListener('click', saveProject);
+  document
+    .querySelector('#new-project-modal__add-task-btn')
+    .removeEventListener('click', addTask);
+  document
+    .querySelector('#new-project-modal__tasks-container')
+    .removeEventListener('click', removeTask);
+  document
+    .querySelector('#new-day-modal__tasks-container')
+    .removeEventListener('click', removeTask);
   daySaveBtn.removeEventListener('click', saveDay);
 }
 
@@ -199,7 +248,9 @@ function resetApp() {
 
 // Create new task --- TO REVAMP IN REACT
 function addTask() {
-  let taskText = document.querySelector('#taskText').value;
+  let taskText = document.querySelector(
+    `#${currentModalPrefix}__task-text`
+  ).value;
   if (taskText) {
     const element = document.createElement('LI');
     const xBtn = document.createElement('SPAN');
@@ -218,7 +269,7 @@ function addTask() {
     };
     // pick lbls for new task
     let pickLblContainer = document.querySelector(
-      '#new-project-modal__label-container'
+      `#${currentModalPrefix}__label-container`
     );
     let lbls = pickLblContainer.childNodes;
     for (const lbl of lbls) {
@@ -230,8 +281,10 @@ function addTask() {
       }
     }
     // Create task and reset form
-    document.querySelector('.modal__tasks-container').appendChild(element);
-    document.querySelector('#taskText').value = '';
+    document
+      .querySelector(`#${currentModalPrefix}__tasks-container`)
+      .appendChild(element);
+    document.querySelector(`#${currentModalPrefix}__task-text`).value = '';
   }
 }
 
