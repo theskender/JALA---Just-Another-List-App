@@ -35,7 +35,6 @@ function saveAdmin() {
   closeModal();
 }
 
-// Probably add an else if to trigger a similar but different function to save when editing projects
 function saveProject() {
   let projectName = document.querySelector('#projectName').value;
   if (!projectName == '') {
@@ -196,7 +195,58 @@ function createTaskCard(project, serviceObj = {}, lblOverride) {
 }
 
 function saveDay() {
-  console.log('Day has been saved!');
+  console.log('saved!');
+  let dayDate = document.querySelector('#dayDate').value;
+  // Info from LS query, needed to update ID counter for days
+  let serviceObj = JSON.parse(localStorage.getItem('service'));
+  // Info from LS query, whole days 'database'
+  let days = JSON.parse(localStorage.getItem('days'));
+  // Object for use within function, contains all data from modal
+  let day = {};
+  day.date = dayDate;
+  day.tasks = [];
+  // hard part: list items to get text and priority labels
+  const tasks = Array.from(
+    document.querySelectorAll('#new-day-modal__tasks-container .modal__task')
+  );
+  for (const [index, content] of tasks.entries()) {
+    let labelIds = [];
+    let labels = content.querySelectorAll('.label-container .priority-label');
+    for (const label of labels) {
+      labelIds.push(label.id);
+    }
+    day.tasks.push({
+      text: content.innerHTML.substr(0, content.innerHTML.indexOf('<')),
+      priorityLabels: labelIds,
+      checked: `${content.classList.contains('checked') ? true : false}`,
+    });
+  }
+
+  //// Update days object in LS, create task card on FE with same id
+  // Case: saving new day
+  if (activeTaskCardId == '') {
+    // store day to LS
+    days[`day${serviceObj.daysIdCounter}`] = day;
+    localStorage.setItem('days', JSON.stringify(days));
+    // // Create new Task Card in FE - needs to be checked, creating task card see if universal function or separate days/projects
+    // createTaskCard(project, serviceObj);
+    // Update project counter in LS
+    serviceObj.daysIdCounter++;
+    localStorage.setItem('service', JSON.stringify(serviceObj));
+  }
+  // Case: updating existing day
+  else if (activeTaskCardId !== '') {
+    // update day in LS
+    days[`${activeTaskCardId}`] = day;
+    localStorage.setItem('days', JSON.stringify(days));
+    // // update task card on FE - needs to be completely redone for li's instead of progress bar
+    // const taskCardHeading = document.querySelector(
+    //   `#${activeTaskCardId} .task-card__header`
+    // );
+  }
+  closeModal();
+  cardDeleteListeners();
+  addMainListeners();
 }
 
 // Large loop function which renders all task cards from LS. Use only on init!!

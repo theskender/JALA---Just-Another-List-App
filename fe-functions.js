@@ -31,6 +31,7 @@ function init() {
   cardDeleteListeners();
   addMainListeners();
   addModalCloseListeners();
+  activeTaskCardId = '';
 }
 
 function showAdmin() {

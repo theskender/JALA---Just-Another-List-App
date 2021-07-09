@@ -302,6 +302,7 @@ footer > p {
   display: inline-block;
   height: 11vh;
   max-width: 90%;
+  word-wrap: break-word;
 }
 
 .day-header {
