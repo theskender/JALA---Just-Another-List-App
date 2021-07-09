@@ -37,7 +37,7 @@
     </header>
     <div class="dummy"></div>
     <div class="main-content">
-      <div class="top-bar">
+      <div class="top-bar top-bar-projects">
         <h2 class="top-bar__name">Projekti</h2>
         <i
           class="fa fa-plus-square top-bar__add-new new-project clickable"
@@ -45,9 +45,8 @@
           aria-hidden="true"
         ></i>
       </div>
-
       <!--Projects container, dynamically fills with task cards-->
-      <div id="projects-container" class="task-card-container"></div>
+      <div class="task-card-container" id="projects-container"></div>
 
       <hr class="divider-line" />
 
@@ -59,100 +58,8 @@
           aria-hidden="true"
         ></i>
       </div>
-      <div class="task-card-container days-container">
-        <div class="task-card task-card-day">
-          <div class="task-card__delete-container">
-            <i class="fa fa-times task-card__delete" aria-hidden="true"></i>
-          </div>
-          <h3 class="task-card__header day-header">01-06-2021</h3>
-          <div class="task-card__tasks-preview-container">
-            <ul class="tasks-preview">
-              <li>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Dolores, culpa assumenda? Ipsam dolor, voluptatem quam eligendi
-                expedita soluta eaque vero eos iusto sint inventore illo,
-                officia ea, reprehenderit aliquam delectus. Lorem ipsum dolor
-                sit amet consectetur adipisicing elit. Facere magnam vitae
-                asperiores quo nulla, laboriosam corporis in, quibusdam possimus
-                laudantium officiis? Sequi quo qui quibusdam dolor facere
-                dolores mollitia sapiente?
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="task-card task-card-day">
-          <div class="task-card__delete-container">
-            <i class="fa fa-times task-card__delete" aria-hidden="true"></i>
-          </div>
-          <h3 class="task-card__header day-header">02-06-2021</h3>
-          <div class="task-card__tasks-preview-container">
-            <ul class="tasks-preview">
-              <li>Teretana</li>
-              <li>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Dolores, culpa assumenda? Ipsam dolor, voluptatem quam eligendi
-                expedita soluta eaque vero eos iusto sint inventore illo,
-                officia ea, reprehenderit aliquam delectus.
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="task-card task-card-day">
-          <div class="task-card__delete-container">
-            <i class="fa fa-times task-card__delete" aria-hidden="true"></i>
-          </div>
-          <h3 class="task-card__header day-header">03-06-2021</h3>
-          <div class="task-card__tasks-preview-container">
-            <ul class="tasks-preview">
-              <li>
-                Hrpa dugog teksta koji nije lorem ipsum da vidim hoće li se
-                pseudo element ponašati normalno
-              </li>
-              <li>Dućan</li>
-            </ul>
-          </div>
-        </div>
-        <div class="task-card task-card-day">
-          <div class="task-card__delete-container">
-            <i class="fa fa-times task-card__delete" aria-hidden="true"></i>
-          </div>
-          <h3 class="task-card__header day-header">04-06-2021</h3>
-          <div class="task-card__tasks-preview-container">
-            <ul class="tasks-preview">
-              <li>Teretana</li>
-              <li>Dućan</li>
-            </ul>
-          </div>
-        </div>
-        <div class="task-card task-card-day">
-          <div class="task-card__delete-container">
-            <i class="fa fa-times task-card__delete" aria-hidden="true"></i>
-          </div>
-          <h3 class="task-card__header day-header">05-06-2021</h3>
-          <div class="task-card__tasks-preview-container">
-            <ul class="tasks-preview">
-              <li>Teretana</li>
-            </ul>
-          </div>
-        </div>
-        <div class="task-card task-card-day">
-          <div class="task-card__delete-container">
-            <i class="fa fa-times task-card__delete" aria-hidden="true"></i>
-          </div>
-          <h3 class="task-card__header day-header">06-06-2021</h3>
-          <div class="task-card__tasks-preview-container">
-            <ul class="tasks-preview">
-              <li>Kupi mlijeko</li>
-              <li>Idi u Poreznu upravu</li>
-              <li>Produži vozačku dozvolu.</li>
-              <li>Kuhaj ručak</li>
-              <li>Kupi gume</li>
-              <li>Pelene</li>
-              <li>Teretana.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+      <!--Days container, dynamically fills with task cards-->
+      <div class="task-card-container" id="days-container"></div>
     </div>
     <footer>
       <p>JustAnotherListApp - Diplomski rad || Domagoj Škender 2021</p>

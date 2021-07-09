@@ -380,6 +380,11 @@ footer > p {
   content: '- ';
 }
 
+.crossed-out {
+  text-decoration: line-through;
+  color: #cac8c8;
+}
+
 .divider-line {
   background-color: #fffafb;
   border-top: 3px dashed #2b2c28;

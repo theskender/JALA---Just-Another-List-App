@@ -73,7 +73,7 @@ function saveProject() {
       projects[`pro${serviceObj.projectsIdCounter}`] = project;
       localStorage.setItem('projects', JSON.stringify(projects));
       // Create new Task Card in FE
-      createTaskCard(project, serviceObj);
+      createTaskCardProject(project, serviceObj);
       // Update project counter in LS
       serviceObj.projectsIdCounter++;
       localStorage.setItem('service', JSON.stringify(serviceObj));
@@ -104,7 +104,7 @@ function saveProject() {
         }
         let checkedTasks = checked;
 
-        progressBarWidth = (checkedTasks / totalTasks).toFixed(2) * 100;
+        progressBarWidth = (checkedTasks / totalTasks).toFixed(2) * 100 ?? 0;
       }
       function calcProgressColor() {
         if (progressBarWidth < 33) progressBarColor = 'red';
@@ -130,7 +130,7 @@ function saveProject() {
 // see if id from LS object can be passed as argument into function
 ////// MAIN CANDIDATE FOR REACT REVAMP ///////
 // For now this is version for task-card-project
-function createTaskCard(project, serviceObj = {}, lblOverride) {
+function createTaskCardProject(project, serviceObj = {}, lblOverride) {
   // create elements
   const taskCard = document.createElement('DIV');
   const taskCardCloseContainer = document.createElement('DIV');
@@ -177,10 +177,8 @@ function createTaskCard(project, serviceObj = {}, lblOverride) {
   progressBar.classList.add('progress-bar');
   progressBarFill.classList.add('progress-bar-fill');
   // PB needs to change dynamically based on % of items checked and name of object
-
   progressBarFill.style.width = `${progressBarWidth}%`;
   progressBarFill.style.backgroundColor = `${progressBarColor}`;
-
   // Appending children and rendering to DOM
   taskCard.appendChild(taskCardCloseContainer);
   taskCardCloseContainer.appendChild(taskCardClose);
@@ -195,7 +193,6 @@ function createTaskCard(project, serviceObj = {}, lblOverride) {
 }
 
 function saveDay() {
-  console.log('saved!');
   let dayDate = document.querySelector('#dayDate').value;
   // Info from LS query, needed to update ID counter for days
   let serviceObj = JSON.parse(localStorage.getItem('service'));
@@ -228,8 +225,8 @@ function saveDay() {
     // store day to LS
     days[`day${serviceObj.daysIdCounter}`] = day;
     localStorage.setItem('days', JSON.stringify(days));
-    // // Create new Task Card in FE - needs to be checked, creating task card see if universal function or separate days/projects
-    // createTaskCard(project, serviceObj);
+    // Create new Task Card in FE - needs to be checked, creating task card see if universal function or separate days/projects
+    createTaskCardDay(day, serviceObj);
     // Update project counter in LS
     serviceObj.daysIdCounter++;
     localStorage.setItem('service', JSON.stringify(serviceObj));
@@ -239,14 +236,72 @@ function saveDay() {
     // update day in LS
     days[`${activeTaskCardId}`] = day;
     localStorage.setItem('days', JSON.stringify(days));
-    // // update task card on FE - needs to be completely redone for li's instead of progress bar
-    // const taskCardHeading = document.querySelector(
-    //   `#${activeTaskCardId} .task-card__header`
-    // );
+    // update task card on FE
+    // - refresh title (date)
+    const taskCardHeading = document.querySelector(
+      `#${activeTaskCardId} .task-card__header`
+    );
+    taskCardHeading.textContent = day.date;
+    // - refresh ul on card
+
+    const tasksPreview = document.querySelector(
+      `#${activeTaskCardId} .tasks-preview`
+    );
+    tasksPreview.innerHTML = '';
+    for (const task of day.tasks) {
+      const listItem = document.createElement('LI');
+      const liText = document.createTextNode(`${task.text}`);
+      listItem.appendChild(liText);
+      if (task.checked == 'true') listItem.classList.add('crossed-out');
+      tasksPreview.appendChild(listItem);
+    }
   }
   closeModal();
   cardDeleteListeners();
   addMainListeners();
+}
+
+function createTaskCardDay(day, serviceObj = {}, lblOverride) {
+  // create elements
+  const taskCard = document.createElement('DIV');
+  const taskCardCloseContainer = document.createElement('DIV');
+  const taskCardClose = document.createElement('I');
+  const previewContainer = document.createElement('DIV');
+  const tasksPreview = document.createElement('UL');
+  const taskCardHeader = document.createElement('H3');
+  const textNode = document.createTextNode(`${day.date}`);
+
+  // add css classes and attributes to elements
+  taskCard.classList.add('task-card', 'task-card-day');
+  taskCard.id =
+    Object.keys(serviceObj).length !== 0
+      ? `day${serviceObj.daysIdCounter}`
+      : `${lblOverride}`;
+  taskCardCloseContainer.classList.add('task-card__delete-container');
+  taskCardClose.classList.add('fa', 'fa-times', 'task-card__delete');
+  taskCardClose.setAttribute('aria-hidden', 'true');
+  taskCardHeader.classList.add('task-card__header', 'day-header');
+  tasksPreview.classList.add('tasks-preview');
+  previewContainer.classList.add('task-card__tasks-preview-container');
+
+  // Appending children and rendering to DOM
+  taskCard.appendChild(taskCardCloseContainer);
+  taskCardCloseContainer.appendChild(taskCardClose);
+  taskCard.appendChild(taskCardHeader);
+  taskCardHeader.appendChild(textNode);
+  taskCard.appendChild(previewContainer);
+  previewContainer.appendChild(tasksPreview);
+
+  // append each task as li to preview
+  for (const task of day.tasks) {
+    const listItem = document.createElement('LI');
+    const liText = document.createTextNode(`${task.text}`);
+    listItem.appendChild(liText);
+    if (task.checked == 'true') listItem.classList.add('crossed-out');
+    tasksPreview.appendChild(listItem);
+  }
+
+  document.querySelector('#days-container').appendChild(taskCard);
 }
 
 // Large loop function which renders all task cards from LS. Use only on init!!
@@ -254,13 +309,21 @@ function saveDay() {
 function renderTaskCards() {
   const projectCardsContainer = document.querySelector('#projects-container');
   projectCardsContainer.innerHTML = '';
-
   const projectCardsData = JSON.parse(localStorage.getItem('projects'));
 
   // Go through each object key and createFE elements accordinlgy
-  const entries = Object.entries(projectCardsData);
-  for (const [key, value] of entries) {
-    createTaskCard(value, undefined, key);
+  const entriesP = Object.entries(projectCardsData);
+  for (const [key, value] of entriesP) {
+    createTaskCardProject(value, undefined, key);
+  }
+
+  const daysCardsContainer = document.querySelector('#days-container');
+  daysCardsContainer.innerHTML = '';
+  const daysCardsData = JSON.parse(localStorage.getItem('days'));
+  // Go through each object key and createFE elements accordinlgy
+  const entriesD = Object.entries(daysCardsData);
+  for (const [key, value] of entriesD) {
+    createTaskCardDay(value, undefined, key);
   }
 }
 
@@ -320,4 +383,11 @@ function loadProjectData(id) {
   loadedProjects = JSON.parse(localStorage.getItem('projects'));
   loadedProject = loadedProjects[id];
   return loadedProject;
+}
+
+function loadDayData(id) {
+  let loadedDay = {};
+  loadedDays = JSON.parse(localStorage.getItem('days'));
+  loadedDay = loadedDays[id];
+  return loadedDay;
 }

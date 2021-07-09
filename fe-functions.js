@@ -159,6 +159,23 @@ function getDate() {
 
 function showEditDay() {
   showNewDay();
+
+  let dataId = this.parentNode.id;
+  // potentially need new function
+  let dayData = loadDayData(dataId);
+  activeTaskCardId = dataId;
+
+  // different legend and heading than newProject
+  let legend = document.querySelector('#day-legend');
+  legend.textContent = `${dayData.date}`;
+  let heading = document.querySelector('#modal__header-title-day');
+  heading.textContent = 'Ažuriranje dana';
+  // input fields fill from LS/DB
+  document.querySelector('#dayDate').value = dayData.date;
+  // add and fill tasks with proper labels and colors from LS
+  for (const task of dayData.tasks) {
+    loadTasks(task.text, task.priorityLabels, task.checked);
+  }
 }
 
 // Labels in label container need to be cleared, needs to be added to this function as they're not part of form and not affected by reset()
@@ -336,7 +353,9 @@ function loadTasks(text, priorityLabels, checked) {
     }
   }
 
-  document.querySelector('.modal__tasks-container').appendChild(element);
+  document
+    .querySelector(`#${currentModalPrefix}__tasks-container`)
+    .appendChild(element);
 }
 
 // Remove this task
@@ -399,11 +418,17 @@ function addMainListeners() {
   }
 }
 
-// Needs LS part of function when LS is implemented - fetch and delete project/day with same id as task card
+// FE part, calls LS functions depending on type of task card
 function deleteTaskCard(e) {
   let cardId = e.target.parentNode.parentNode.id;
   // Probably to be merged with delete LSDay function, for now just like this.
-  deleteLSProject(cardId);
+  if (e.target.parentNode.parentNode.classList.contains('task-card-project')) {
+    deleteLSProject(cardId);
+  } else if (
+    e.target.parentNode.parentNode.classList.contains('task-card-day')
+  ) {
+    deleteLSDay(cardId);
+  }
 
   e.target.parentNode.parentNode.classList.add('task-card-deletion');
   setTimeout(function () {
@@ -416,6 +441,12 @@ function deleteLSProject(cardId) {
   let projects = JSON.parse(localStorage.getItem('projects'));
   delete projects[cardId];
   localStorage.setItem('projects', JSON.stringify(projects));
+}
+
+function deleteLSDay(cardId) {
+  let days = JSON.parse(localStorage.getItem('days'));
+  delete days[cardId];
+  localStorage.setItem('days', JSON.stringify(days));
 }
 
 function addModalCloseListeners() {
