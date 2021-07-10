@@ -104,7 +104,11 @@ function saveProject() {
         }
         let checkedTasks = checked;
 
-        progressBarWidth = (checkedTasks / totalTasks).toFixed(2) * 100 ?? 0;
+        if (project.tasks.length == 0) {
+          progressBarWidth = 0;
+        } else {
+          progressBarWidth = (checkedTasks / totalTasks).toFixed(2) * 100 ?? 0;
+        }
       }
       function calcProgressColor() {
         if (progressBarWidth < 33) progressBarColor = 'red';
