@@ -143,12 +143,12 @@ footer > p {
   width: 6vh;
   border-radius: 50%;
   margin-left: 2vh;
-  /* bottom: 0; */
   right: 0;
   top: 2vh;
   position: absolute;
   display: inline-block;
   transition: transform 0.4s;
+  background-color: #fffafb;
 }
 
 .header-user-pic:hover {
@@ -369,11 +369,13 @@ footer > p {
 
 .tasks-preview {
   list-style: none;
+  word-wrap: break-word;
 }
 
 .tasks-preview > li {
   margin: 0 0 2vh 0;
   line-height: 1.8;
+  word-wrap: break-word;
 }
 
 .tasks-preview > li::before {

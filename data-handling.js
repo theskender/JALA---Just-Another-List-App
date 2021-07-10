@@ -7,7 +7,7 @@ function saveAdmin() {
   const userInput = Array.from(document.querySelectorAll('#admin input'));
   let workMap = new Map();
   for (const [index, formItem] of userInput.entries()) {
-    if (formItem.value == '') formItem.value = '-';
+    if (formItem.value == '') formItem.value = '';
     workMap.set(formItem.id, formItem.value);
   }
   // remove values not stored directly in base

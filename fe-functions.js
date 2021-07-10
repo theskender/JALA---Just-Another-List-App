@@ -120,7 +120,6 @@ function showNewDay() {
   const scrollArea = document.querySelector('#modal__content-day');
   scrollArea.scrollTo(0, 0);
 
-  loadLabels();
   document
     .querySelector('#new-day-modal__label-container')
     .addEventListener('click', pickTaskLabel);
@@ -137,6 +136,9 @@ function showNewDay() {
   dateInput.value = getDate();
   // - handler for save functionality
   daySaveBtn.addEventListener('click', saveDay);
+
+  // load priority labels
+  loadLabels();
 }
 
 function getDate() {
@@ -192,6 +194,9 @@ function closeModal() {
   // Clears FE labels for other modals
   const tasksContainerSelector = `#${currentModalPrefix}__tasks-container`;
   const taskContainer = document.querySelector(tasksContainerSelector);
+  // Clear task text in new day modal
+  const taskTextDay = document.querySelector('#new-day-modal__task-text');
+  taskTextDay.value = '';
   labelContainer.innerHTML = '';
   if (currentModalPrefix !== 'admin-modal') taskContainer.innerHTML = '';
   currentModal = undefined;
