@@ -96,12 +96,12 @@
 
   .progress-bar {
     height: 11vh;
-    border-radius: 6vh;
+    border-radius: 1vh;
     padding: 1vh;
   }
 
   .progress-bar-fill {
-    border-radius: 6vh;
+    border-radius: 1vh;
     height: 9vh;
   }
 

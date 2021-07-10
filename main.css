@@ -343,17 +343,17 @@ footer > p {
   height: 8vh;
   background-color: #fffafb;
 
-  border-radius: 7vh;
+  border-radius: 1vh;
   padding: 1vh;
   box-shadow: 2px 2px 4px #0000007c;
 }
 
 .progress-bar-fill {
-  /*Background color and width need to change dynamically using JS based on JSON data from LocalStorage*/
-  border-radius: 7vh;
+  border-radius: 1vh;
   width: 0;
   height: 6vh;
   background-color: green;
+  box-shadow: inset 0 0 5px rgb(196, 196, 196);
 }
 
 .task-card__tasks-preview-container {
