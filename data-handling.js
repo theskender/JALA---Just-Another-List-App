@@ -241,7 +241,7 @@ function saveDay() {
     const taskCardHeading = document.querySelector(
       `#${activeTaskCardId} .task-card__header`
     );
-    taskCardHeading.textContent = day.date;
+    taskCardHeading.textContent = fixDate(day.date);
     // - refresh ul on card
 
     const tasksPreview = document.querySelector(
@@ -261,6 +261,14 @@ function saveDay() {
   addMainListeners();
 }
 
+// changes date format for FE cards
+function fixDate(date) {
+  let fixedDate = '';
+  fixedDate =
+    date.slice(8, 10) + '-' + date.slice(5, 7) + '-' + date.slice(0, 4);
+  return fixedDate;
+}
+
 function createTaskCardDay(day, serviceObj = {}, lblOverride) {
   // create elements
   const taskCard = document.createElement('DIV');
@@ -269,7 +277,7 @@ function createTaskCardDay(day, serviceObj = {}, lblOverride) {
   const previewContainer = document.createElement('DIV');
   const tasksPreview = document.createElement('UL');
   const taskCardHeader = document.createElement('H3');
-  const textNode = document.createTextNode(`${day.date}`);
+  const textNode = document.createTextNode(`${fixDate(day.date)}`);
 
   // add css classes and attributes to elements
   taskCard.classList.add('task-card', 'task-card-day');
@@ -305,7 +313,6 @@ function createTaskCardDay(day, serviceObj = {}, lblOverride) {
 }
 
 // Large loop function which renders all task cards from LS. Use only on init!!
-// Works only on projects for now, apply days after implementing them!!
 function renderTaskCards() {
   const projectCardsContainer = document.querySelector('#projects-container');
   projectCardsContainer.innerHTML = '';

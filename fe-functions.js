@@ -169,7 +169,7 @@ function showEditDay() {
 
   // different legend and heading than newProject
   let legend = document.querySelector('#day-legend');
-  legend.textContent = `${dayData.date}`;
+  legend.textContent = `${fixDate(dayData.date)}`;
   let heading = document.querySelector('#modal__header-title-day');
   heading.textContent = 'Ažuriranje dana';
   // input fields fill from LS/DB
