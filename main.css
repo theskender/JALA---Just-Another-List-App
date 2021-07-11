@@ -207,9 +207,9 @@ footer > p {
 .task-card-container {
   width: 100%;
   display: flex;
-  flex-direction: row-reverse;
-  flex-wrap: wrap-reverse;
-  justify-content: flex-end;
+  flex-direction: row; /*-reverse*/
+  flex-wrap: wrap; /*-reverse*/
+  justify-content: flex-start;
   align-items: flex-start;
   align-content: center;
   padding-bottom: 3vh;
@@ -365,6 +365,9 @@ footer > p {
   text-align: left;
   overflow: hidden;
   cursor: pointer;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .tasks-preview {

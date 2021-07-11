@@ -125,6 +125,10 @@ label {
   margin-top: 1vh;
 }
 
+.has-tooltip {
+  cursor: help;
+}
+
 input,
 select {
   float: right;
@@ -280,7 +284,6 @@ fieldset > .form-btn-container {
   margin: 0;
   padding: 0;
   min-height: 2vh;
-  word-wrap: break-word;
 }
 
 .modal__tasks-container .modal__task {
@@ -292,7 +295,9 @@ fieldset > .form-btn-container {
   font-size: 2vh;
   transition: 0.2s;
   line-height: 1.5;
+  overflow-wrap: break-word;
   word-wrap: break-word;
+  word-break: break-word;
 }
 
 .modal__tasks-container .modal__task:hover {

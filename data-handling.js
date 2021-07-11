@@ -136,6 +136,7 @@ function saveProject() {
 // For now this is version for task-card-project
 function createTaskCardProject(project, serviceObj = {}, lblOverride) {
   // create elements
+  const container = document.querySelector('#projects-container');
   const taskCard = document.createElement('DIV');
   const taskCardCloseContainer = document.createElement('DIV');
   const taskCardClose = document.createElement('I');
@@ -193,7 +194,7 @@ function createTaskCardProject(project, serviceObj = {}, lblOverride) {
   progressBar.appendChild(progressBarFill);
   progressBarContainer.appendChild(progressBar);
 
-  document.querySelector('#projects-container').appendChild(taskCard);
+  container.insertBefore(taskCard, container.firstChild);
 }
 
 function saveDay() {
@@ -275,6 +276,7 @@ function fixDate(date) {
 
 function createTaskCardDay(day, serviceObj = {}, lblOverride) {
   // create elements
+  const container = document.querySelector('#days-container');
   const taskCard = document.createElement('DIV');
   const taskCardCloseContainer = document.createElement('DIV');
   const taskCardClose = document.createElement('I');
@@ -313,7 +315,7 @@ function createTaskCardDay(day, serviceObj = {}, lblOverride) {
     tasksPreview.appendChild(listItem);
   }
 
-  document.querySelector('#days-container').appendChild(taskCard);
+  container.insertBefore(taskCard, container.firstChild);
 }
 
 // Large loop function which renders all task cards from LS. Use only on init!!
